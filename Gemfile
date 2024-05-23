@@ -6,6 +6,7 @@ gem "rails"
 
 gem "bootsnap", require: false
 gem "cssbundling-rails"
+gem 'devise'
 gem "jsbundling-rails"
 gem "pg"
 gem "propshaft"
