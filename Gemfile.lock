@@ -308,7 +308,7 @@ DEPENDENCIES
   pg
   propshaft
   puma
-  rails
+  rails (~> 7.1.3.3)
   rspec-rails
   rubocop
   rubocop-rails
