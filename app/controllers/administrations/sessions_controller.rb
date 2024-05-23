@@ -4,10 +4,10 @@ class Administrations::SessionsController < Devise::SessionsController
   layout 'administration/application'
 
   def after_sign_in_path_for(resource)
-    # TODO: ログイン後のパスに変える
+    administrations_root_path
   end
 
   def after_sign_out_path_for(resource)
-    # TODO: ログイン画面のパスに変える
+    new_administration_session_path
   end
 end
