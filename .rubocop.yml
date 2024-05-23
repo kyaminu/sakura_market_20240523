@@ -1,0 +1,90 @@
+inherit_gem:
+  sgcop: rails/rubocop.yml
+
+RSpec/NestedGroups:
+  Max: 4
+
+# クラス内の定義順を一定に
+Layout/ClassStructure:
+  Enabled: true
+
+# 複数行の配列を書くときは、最初の要素の前に改行を入れる
+Layout/FirstArrayElementLineBreak:
+  Enabled: true
+
+# 複数行のハッシュを書くときは、最初の要素の前に改行を入れる
+Layout/FirstHashElementLineBreak:
+  Enabled: true
+
+# ヒアドキュメントを引数として渡す際に、閉じ括弧）の位置は、開始タグを含む行の末尾が推奨
+Layout/HeredocArgumentClosingParenthesis:
+  Enabled: true
+
+# 複数行に渡る代入において、代入演算子の後ろに改行を入れる
+Layout/MultilineAssignmentLayout:
+  Enabled: true
+
+# 複数行に渡るメソッド呼び出しでは、一行に複数の引数を入れてはならない
+Layout/MultilineMethodArgumentLineBreaks:
+  Enabled: true
+  AllowMultilineFinalElement: true
+
+Layout/FirstHashElementIndentation:
+  EnforcedStyle: consistent
+
+# private/protected は一段深くインデントする
+Layout/IndentationConsistency:
+  EnforcedStyle: indented_internal_methods
+
+Layout/MultilineMethodCallIndentation:
+  EnforcedStyle: indented
+
+# NOTE: 気にするほど件数多くないケースが大半なので視認性重視
+Rails/BulkChangeTable:
+  Enabled: false
+
+Rails/SkipsModelValidations:
+  # NOTE: 意図せず使うことはない
+  AllowedMethods:
+    - touch
+
+# 自動的にリソースのクリーンアップを行ってくれる方を推奨
+Style/AutoResourceCleanup:
+  Enabled: true
+
+# 引数を伴うメソッド呼び出しの括弧は必要（マクロは無視）
+Style/MethodCallWithArgsParentheses:
+  Enabled: true
+
+# 複数行の場合はケツカンマを入れる
+Style/TrailingCommaInHashLiteral:
+  EnforcedStyleForMultiline: comma
+
+Style/TrailingCommaInArrayLiteral:
+  EnforcedStyleForMultiline: comma
+
+# end.some_method とチェインするのはダサい
+Style/MethodCalledOnDoEndBlock:
+  Enabled: true
+
+# 空メソッドの場合だけ1行で書かなければいけない理由が無い
+# 「セミコロンは使わない」に寄せた方がルールがシンプル
+Style/EmptyMethod:
+  EnforcedStyle: expanded
+
+# sgcopで無効に設定されているが混在は防ぎたい
+Style/PercentLiteralDelimiters:
+  Enabled: true
+
+# 自動修正時にenumerizeのvalues.include?で誤爆する、、
+Performance/InefficientHashSearch:
+  Enabled: false
+
+# 分かりにくい
+Performance/Casecmp:
+  Enabled: false
+
+# spec では複数行のブロックも { } で書きたい
+Style/BlockDelimiters:
+  Exclude:
+    - 'spec/**/*'
