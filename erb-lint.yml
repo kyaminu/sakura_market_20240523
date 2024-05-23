@@ -1,0 +1,30 @@
+linters:
+  ErbSafety:
+    # TODO: [@rhymes] re-enable this and fix the violations,
+    # see https://github.com/Shopify/erb-lint#ErbSafety
+    enabled: false
+  SelfClosingTag:
+    enabled: false
+  AllowedScriptType:
+    enabled: true
+    allowed_types:
+      - "text/javascript"
+    allow_blank: true
+    disallow_inline_scripts: false
+  Rubocop:
+    enabled: true
+    rubocop_config:
+      inherit_from:
+        - .rubocop.yml
+      Layout/InitialIndentation:
+        Enabled: false
+      Layout/LineLength:
+        Max: 250
+      Layout/TrailingEmptyLines:
+        Enabled: false
+      Lint/UselessAssignment:
+        Enabled: false
+      Rails/OutputSafety:
+        Enabled: false
+      Style/MethodCallWithArgsParentheses:
+        Enabled: false
