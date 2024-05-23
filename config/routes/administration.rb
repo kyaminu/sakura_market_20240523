@@ -1,3 +1,3 @@
 devise_for :administrations, controllers: {
-  sessions: 'administrations/sessions'
+  sessions: 'administration/sessions'
 }
