@@ -3,5 +3,11 @@
   "private": true,
   "browserslist": [
     "defaults"
-  ]
+  ],
+  "dependencies": {
+    "esbuild": "^0.21.3"
+  },
+  "scripts": {
+    "build": "esbuild app/javascript/*.* --bundle --sourcemap --format=esm --outdir=app/assets/builds --public-path=/assets"
+  }
 }
