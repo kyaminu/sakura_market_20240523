@@ -5,6 +5,7 @@
     "defaults"
   ],
   "dependencies": {
+    "@hotwired/turbo-rails": "^8.0.4",
     "@popperjs/core": "^2.11.8",
     "autoprefixer": "^10.4.19",
     "bootstrap": "^5.3.3",
