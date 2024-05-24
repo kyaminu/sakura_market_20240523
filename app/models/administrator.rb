@@ -1,4 +1,4 @@
-class Administration < ApplicationRecord
+class Administrator < ApplicationRecord
   devise :database_authenticatable, :rememberable, :validatable
 
   validates :email, presence: true
