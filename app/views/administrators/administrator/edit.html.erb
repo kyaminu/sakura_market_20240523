@@ -1,2 +1,5 @@
-<h1>Administrators::Administrator#edit</h1>
-<p>Find me in app/views/administrators/administrator/edit.html.erb</p>
+<div class="mx-3">
+  <h1 class="fs-2"><%= title '管理ユーザー編集' %></h1>
+
+  <%= render 'form', administrator: @administrator, url: administrators_administrator_path(@administrator)  %>
+</div>

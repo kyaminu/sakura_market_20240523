@@ -1,2 +1,4 @@
-<h1>Administrators::Administrator#new</h1>
-<p>Find me in app/views/administrators/administrator/new.html.erb</p>
+<div class="mx-3">
+  <h1 class="fs-2"><%= title '管理ユーザー新規登録' %></h1>
+  <%= render 'form', administrator: @administrator, url: administrators_administrator_index_path  %>
+</div>

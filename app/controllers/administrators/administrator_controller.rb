@@ -22,7 +22,7 @@ before_action :set_administrator, only: %i[edit update destroy]
   end
 
   def update
-    if @administrator.update
+    if @administrator.update(administrator_params)
       redirect_to administrators_administrator_index_path, notice: '更新しました'
     else
       render :edit, status: :unprocessable_entity
@@ -41,6 +41,6 @@ before_action :set_administrator, only: %i[edit update destroy]
     end
 
     def administrator_params
-      params.require(:administrators).permit(%i[email password])
+      params.require(:administrator).permit(%i[email password])
     end
 end
