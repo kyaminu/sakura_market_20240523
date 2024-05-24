@@ -1,5 +1,5 @@
 FactoryBot.define do
-  factory :administration do
+  factory :administrator do
     sequence(:email) { |index| "administration-#{index}@example.com" }
     password { 'password' }
   end
