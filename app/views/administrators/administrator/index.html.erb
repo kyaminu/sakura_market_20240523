@@ -1,0 +1,29 @@
+<div class="mx-3">
+  <h1 class="fs-2"><%= '管理ユーザ一覧' %></h1>
+
+  <div class="d-flex flex-row-reverse me-5">
+    <%= link_to '新規登録', new_administrators_administrator_path, class: 'btn btn-secondary' %>
+  </div>
+
+  <table class="table custom-table">
+    <thead>
+    <tr>
+      <th>メールアドレス</th>
+      <th></th>
+    </tr>
+    </thead>
+    <tbody>
+      <% @administrators.each do |administrator| %>
+        <tr>
+          <td><%= administrator.email %></td>
+          <td class="text-end">
+            <div class="hstack gap-2">
+              <%= link_to '編集', edit_administrators_administrator_path(administrator), class: 'btn btn-success' %>
+              <%= button_to '削除', administrators_administrator_path(administrator), method: :delete, data: { turbo_confirm: '本当に削除します。よろしいですか？' }, class: 'btn btn-danger' %>
+            </div>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

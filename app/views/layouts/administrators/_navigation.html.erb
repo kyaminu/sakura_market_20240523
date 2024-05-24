@@ -10,7 +10,9 @@
           <%= link_to '商品一覧', administrators_root_path, class: 'nav-link' %>
         </li>
         <li class="nav-item"><a href="#" class="nav-link">ユーザ一覧</a></li>
-        <li class="nav-item"><a href="#" class="nav-link">管理ユーザ一覧</a></li>
+        <li class="nav-item">
+          <%= link_to '管理ユーザ一覧', administrators_administrator_index_path, class: 'nav-link' %>
+        </li>
         <li class="nav-item">
           <%= button_to 'Log out', destroy_administrator_session_path, method: :delete, class: "nav-link" %>
         </li>

@@ -36,11 +36,11 @@ before_action :set_administrator, only: %i[edit update destroy]
 
   private
 
-    def set_admin_user
+    def set_administrator
       @administrator = Administrator.find(params[:id])
     end
 
     def administrator_params
-      params.require(:administrator).permit(%i[email password])
+      params.require(:administrators).permit(%i[email password])
     end
 end
