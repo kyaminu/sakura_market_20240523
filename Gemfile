@@ -8,6 +8,7 @@ gem "bootsnap", require: false
 gem "cssbundling-rails"
 gem 'devise'
 gem "jsbundling-rails"
+gem "meta-tags"
 gem "pg"
 gem "propshaft"
 gem "puma"
