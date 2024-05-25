@@ -7,11 +7,13 @@ gem "rails", "~> 7.1.3.3"
 gem "bootsnap", require: false
 gem "cssbundling-rails"
 gem 'devise'
+gem 'devise-i18n'
 gem "jsbundling-rails"
 gem "meta-tags"
 gem "pg"
 gem "propshaft"
 gem "puma"
+gem 'rails-i18n'
 gem 'simple_form'
 gem "stimulus-rails"
 gem "turbo-rails"
