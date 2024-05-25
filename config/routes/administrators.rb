@@ -3,6 +3,6 @@ devise_for :administrators, controllers: {
 }
 
 namespace :administrators do
-  resources :administrator, only: %i[index new edit create update destroy]
+  resources :administrators, only: %i[index new edit create update destroy]
   root to: 'items#index'
 end

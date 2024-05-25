@@ -1,26 +1,24 @@
-<div class="container">
-  <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
-    <%= link_to administrators_root_path, class: 'd-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none' do %>
-      <span class="fs-4">管理画面 さくらマーケット</span>
-    <% end %>
+<header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
+  <%= link_to administrators_root_path, class: 'd-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none' do %>
+    <span class="fs-4">管理画面 さくらマーケット</span>
+  <% end %>
 
-    <ul class="nav nav-pills">
-      <% if administrator_signed_in? %>
-        <li class="nav-item">
-          <%= link_to '商品一覧', administrators_root_path, class: 'nav-link' %>
-        </li>
-        <li class="nav-item"><a href="#" class="nav-link">ユーザ一覧</a></li>
-        <li class="nav-item">
-          <%= link_to '管理ユーザ一覧', administrators_administrator_index_path, class: 'nav-link' %>
-        </li>
-        <li class="nav-item">
-          <%= button_to 'Log out', destroy_administrator_session_path, method: :delete, class: "nav-link" %>
-        </li>
-      <% else %>
-        <li class="nav-item">
-          <%= link_to 'Log in', new_administrator_session_path, class: "nav-link" %>
-        </li>
-      <% end %>
-    </ul>
-  </header>
-</div>
+  <ul class="nav nav-pills">
+    <% if administrator_signed_in? %>
+      <li class="nav-item">
+        <%= link_to '商品一覧', administrators_root_path, class: 'nav-link' %>
+      </li>
+      <li class="nav-item"><a href="#" class="nav-link">ユーザ一覧</a></li>
+      <li class="nav-item">
+        <%= link_to '管理ユーザ一覧', administrators_administrators_path, class: 'nav-link' %>
+      </li>
+      <li class="nav-item">
+        <%= button_to 'Log out', destroy_administrator_session_path, method: :delete, class: "nav-link" %>
+      </li>
+    <% else %>
+      <li class="nav-item">
+        <%= link_to 'Log in', new_administrator_session_path, class: "nav-link" %>
+      </li>
+    <% end %>
+  </ul>
+</header>
