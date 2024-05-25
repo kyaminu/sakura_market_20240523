@@ -18,8 +18,10 @@ gem "turbo-rails"
 
 group :development, :test do
   gem 'debug'
+  gem 'capybara'
   gem 'erb_lint', require: false
   gem 'factory_bot_rails'
+  gem 'selenium-webdriver'
   gem 'rspec-rails'
   gem 'rubocop', require: false
   gem 'rubocop-rails', require: false
