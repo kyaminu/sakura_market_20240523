@@ -15,8 +15,8 @@
     <tbody>
       <% @administrators.each do |administrator| %>
         <tr>
-          <td ><%= administrator.email %></td>
-          <td class="text-end col-5">
+          <td><%= administrator.email %></td>
+          <td class="text-end">
             <div class="hstack gap-2">
               <%= link_to '編集', edit_administrators_administrator_path(administrator), class: 'btn btn-success' %>
               <%= button_to '削除', administrators_administrator_path(administrator), method: :delete, data: { turbo_confirm: '本当に削除します。よろしいですか？' }, class: 'btn btn-danger' %>
