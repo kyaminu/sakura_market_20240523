@@ -1,7 +1,7 @@
 class Item < ApplicationRecord
   acts_as_list
 
-  has_one_attached :image do |attachable|
+  has_many_attached :images do |attachable|
     attachable.variant(:thumb, resize_to_fill: [120, 80])
     attachable.variant(:full, resize_to_fit: [400, 300])
   end
