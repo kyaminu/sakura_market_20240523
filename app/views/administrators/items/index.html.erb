@@ -1,1 +1,46 @@
-商品画面一覧
+<div class="mx-3">
+  <h1 class="fs-2"><%= title '商品一覧' %></h1>
+
+  <div class="d-flex flex-row-reverse me-5">
+    <%= link_to '新規登録', new_administrators_item_path, class: 'btn btn-secondary' %>
+  </div>
+
+  <table class="table custom-table">
+    <thead>
+      <tr>
+        <th></th>
+        <th>画像</th>
+        <th>商品名</th>
+        <th>商品説明</th>
+        <th>価格</th>
+        <th>公開</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+    <% @items.each do |item| %>
+      <tr>
+        <td>
+          <div class="hstack gap-2">
+            <%= button_to '↑', move_higher_administrators_item_path(item), method: :put, class: 'btn btn-sm btn-light' %>
+            <%= button_to '↓', move_lower_administrators_item_path(item),  method: :put, class: 'btn btn-sm btn-light' %>
+          </div>
+        </td>
+        <td><%= image_tag(item.images.first.variant(:thumb)) if item.images.present? %></td>
+        <td><%= item.name %></td>
+        <td>
+          <div class="text-truncate admin_item_index-description"><%= item.description %></div>
+        </td>
+        <td><%= number_to_currency(item.price_excluding_tax) %></td>
+        <td><%= '公開中' if item.published? %></td>
+        <td class="text-end">
+          <div class="hstack gap-2">
+            <%= link_to '編集', edit_administrators_item_path(item), class: 'btn btn-success' %>
+            <%= button_to '削除', administrators_item_path(item), method: :delete, data: { turbo_confirm: '本当に削除します。よろしいですか？' }, class: 'btn btn-danger' %>
+          </div>
+        </td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+</div>
