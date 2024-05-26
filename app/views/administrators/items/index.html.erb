@@ -12,14 +12,14 @@
         <th>画像</th>
         <th>商品名</th>
         <th>商品説明</th>
-        <th>価格</th>
+        <th>価格(税抜)</th>
         <th>公開</th>
         <th></th>
       </tr>
     </thead>
     <tbody>
     <% @items.each do |item| %>
-      <tr>
+      <tr class="<%= class_names('table-secondary': !item.published?) %>">
         <td>
           <div class="hstack gap-2">
             <%= button_to '↑', move_higher_administrators_item_path(item), method: :put, class: 'btn btn-sm btn-light' %>
