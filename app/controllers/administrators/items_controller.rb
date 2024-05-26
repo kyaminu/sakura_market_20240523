@@ -1,4 +1,6 @@
 class Administrators::ItemsController < Administrators::ApplicationController
+  before_action :set_item, only: %i[edit update destroy move_higher move_lower]
+
   def index
     @items = Item.default_order
   end
@@ -13,7 +15,7 @@ class Administrators::ItemsController < Administrators::ApplicationController
   def create
     @item = Item.new(item_params)
     if @item.save
-      redirect_to administrators_items_path, notice: '登録しました'
+      redirect_to administrators_root_path, notice: '登録しました'
     else
       render :new, status: :unprocessable_entity
     end
@@ -21,7 +23,7 @@ class Administrators::ItemsController < Administrators::ApplicationController
 
   def update
     if @item.update(item_params)
-      redirect_to administrators_items_path, notice: '更新しました'
+      redirect_to administrators_root_path, notice: '更新しました'
     else
       render :edit, status: :unprocessable_entity
     end
@@ -44,7 +46,11 @@ class Administrators::ItemsController < Administrators::ApplicationController
 
   private
 
-  def item_params
-    params.require(:item).permit(%i[name description price_excluding_tax published], images: [])
-  end
+    def set_item
+      @item = Item.find(params[:id])
+    end
+
+    def item_params
+      params.require(:item).permit(%i[name description price_excluding_tax published], images: [])
+    end
 end
