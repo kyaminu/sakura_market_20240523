@@ -11,7 +11,6 @@ class Item < ApplicationRecord
   validates :image, presence: true
   validates :price_excluding_tax, presence: true, numericality: { greater_than_or_equal_to: 1 }
   validates :position, presence: true
-  validates :tax_rate, presence: true
 
   scope :default_order, -> { order(:position) }
   scope :published, -> { where(published: true) }
