@@ -1,0 +1,23 @@
+ja:
+  time:
+    formats:
+      default: "%Y年%m月%d日"
+  number:
+    currency:
+      format:
+        unit: "¥"
+        format: "%u%n"
+        delimiter: ","
+        precision: 0
+  activerecord:
+    attributes:
+      administrator:
+        email: メールアドレス
+        password: パスワード
+        remember_me: ログイン情報を保存する
+      item:
+        name: 商品名
+        description: 商品説明
+        image: 画像
+        price_excluding_tax: 価格(税抜)
+        published: 公開
