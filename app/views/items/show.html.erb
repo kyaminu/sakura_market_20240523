@@ -1,2 +1,28 @@
-<h1>Items#show</h1>
-<p>Find me in app/views/items/show.html.erb</p>
+<div class="mx-3">
+  <h1 class="fs-2">
+    <%= title @item.name %>
+  </h1>
+
+  <div class="d-flex justify-content-around">
+    <div class="col-3">
+      <%= image_tag @item.image.variant(:full) %>
+    </div>
+
+    <div class="col-4">
+      <div class="d-flex justify-content-between mb-3">
+        <div class="fs-4 my-3">
+          <%= number_to_currency(@item.included_tax_price) %>
+        </div>
+
+        <div class="align-self-center">
+          <%= button_to 'カートに追加', '#', method: :post, class: "btn btn-primary" %>
+        </div>
+      </div>
+
+      <%= @item.description %>
+      <div class="text-end my-3">
+        <%= link_to '他の商品を見る', root_path, class: 'btn btn-secondary' %>
+      </div>
+    </div>
+  </div>
+</div>
