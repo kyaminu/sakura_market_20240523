@@ -6,5 +6,13 @@ FactoryBot.define do
     published { false }
     position { 1 }
     image { Rails.root.join('spec/fixtures/files/images/test.jpeg') }
+
+    trait :published do
+      published { true }
+    end
+
+    trait :not_published do
+      published { false }
+    end
   end
 end
