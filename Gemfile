@@ -4,11 +4,13 @@ ruby "3.3.1"
 
 gem "rails", "~> 7.1.3.3"
 
+gem 'acts_as_list'
 gem "bootsnap", require: false
 gem "cssbundling-rails"
 gem 'devise'
 gem 'devise-i18n'
 gem "jsbundling-rails"
+gem 'image_processing'
 gem "meta-tags"
 gem "pg"
 gem "propshaft"
