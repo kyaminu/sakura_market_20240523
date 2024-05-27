@@ -7,17 +7,23 @@ gem "rails", "~> 7.1.3.3"
 gem "bootsnap", require: false
 gem "cssbundling-rails"
 gem 'devise'
+gem 'devise-i18n'
 gem "jsbundling-rails"
+gem "meta-tags"
 gem "pg"
 gem "propshaft"
 gem "puma"
+gem 'rails-i18n'
+gem 'simple_form'
 gem "stimulus-rails"
 gem "turbo-rails"
 
 group :development, :test do
   gem 'debug'
+  gem 'capybara'
   gem 'erb_lint', require: false
   gem 'factory_bot_rails'
+  gem 'selenium-webdriver'
   gem 'rspec-rails'
   gem 'rubocop', require: false
   gem 'rubocop-rails', require: false
