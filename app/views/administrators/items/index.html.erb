@@ -26,7 +26,7 @@
             <%= button_to '↓', move_lower_administrators_item_path(item),  method: :put, class: 'btn btn-sm btn-light' %>
           </div>
         </td>
-        <td><%= image_tag(item.images.first.variant(:thumb)) if item.images.present? %></td>
+        <td><%= image_tag(item.image) if item.image.present? %></td>
         <td><%= item.name %></td>
         <td>
           <div class="text-truncate admin_item_index-description"><%= item.description %></div>

@@ -12,7 +12,7 @@ describe '商品管理', type: :system do
     fill_in 'item[name]', with: 'トマト'
     fill_in 'item[description]', with: '美味しいトマト'
     fill_in 'item[price_excluding_tax]', with: '100'
-    attach_file 'item[images][]', [ Rails.root.join('spec/fixtures/files/images/test.jpeg') ]
+    attach_file 'item[image]', Rails.root.join('spec/fixtures/files/images/test.jpeg')
     click_on '登録する'
 
     expect(page).to have_content '登録しました'
@@ -25,7 +25,6 @@ describe '商品管理', type: :system do
 
     visit edit_administrators_item_path(item)
     fill_in 'item[name]', with: 'とまと'
-    attach_file 'item[images][]', [ Rails.root.join('spec/fixtures/files/images/test.jpeg') ]
     click_on '更新する'
 
     expect(page).to have_content '更新しました'

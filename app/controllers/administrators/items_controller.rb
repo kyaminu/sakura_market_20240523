@@ -51,6 +51,6 @@ class Administrators::ItemsController < Administrators::ApplicationController
     end
 
     def item_params
-      params.require(:item).permit(%i[name description price_excluding_tax published], images: [])
+      params.require(:item).permit(%i[name description price_excluding_tax published image])
     end
 end

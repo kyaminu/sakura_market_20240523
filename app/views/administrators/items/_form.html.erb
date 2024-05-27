@@ -1,13 +1,9 @@
 <%= simple_form_for item, url: url do |f| %>
   <%= f.input :name %>
   <%= f.input :description, as: :text, input_html: { rows: 5 } %>
-  <%= f.input :images, as: :file, input_html: { multiple: true }, required: item.new_record? %>
+  <%= f.input :image, as: :file, required: item.new_record? %>
   <div class="my-3">
-    <% if item.persisted? && item.images.present? %>
-      <% item.images.each do |image| %>
-        <%= image_tag(image.variant(:full)) %>
-      <% end %>
-    <% end %>
+    <%= image_tag(item.image.variant(:full)) if item.persisted? && item.image.present? %>
   </div>
   <%= f.input :price_excluding_tax %>
   <%= f.input :published, as: :boolean %>

@@ -5,7 +5,6 @@ FactoryBot.define do
     price_excluding_tax { 100 }
     published { false }
     position { 1 }
-    tax_rate { "0.08" }
-    images { Rails.root.join('spec/fixtures/files/images/test.jpeg') }
+    image { Rails.root.join('spec/fixtures/files/images/test.jpeg') }
   end
 end
