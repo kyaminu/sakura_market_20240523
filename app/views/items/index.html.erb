@@ -19,7 +19,7 @@
             <% end %>
 
             <div class="text-end mb-2">
-              <div class="mb-1"><%= number_to_currency(item.price_excluding_tax) %></div>
+              <div class="mb-1"><%= number_to_currency(item.included_tax_price) %>(税込)</div>
               <%= button_to 'カートに追加', '#', method: :post, class: "btn btn-primary" %>
             </div>
           </div>

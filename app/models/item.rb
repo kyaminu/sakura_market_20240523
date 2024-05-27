@@ -14,4 +14,8 @@ class Item < ApplicationRecord
 
   scope :default_order, -> { order(:position) }
   scope :published, -> { where(published: true) }
+
+  def included_tax_price
+    (price_excluding_tax * (1 + tax_rate)).floor
+  end
 end
