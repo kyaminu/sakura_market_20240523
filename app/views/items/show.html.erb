@@ -1,8 +1,7 @@
-<div class="mx-3">
+<div class="container">
   <h1 class="fs-2">
     <%= title @item.name %>
   </h1>
-
   <div class="d-flex justify-content-around">
     <div class="col-3">
       <%= image_tag @item.image.variant(:full) %>
@@ -11,7 +10,7 @@
     <div class="col-4">
       <div class="d-flex justify-content-between mb-3">
         <div class="fs-4 my-3">
-          <%= number_to_currency(@item.included_tax_price) %>
+          <%= number_to_currency(@item.price_included_tax) %>
         </div>
 
         <div class="align-self-center">
