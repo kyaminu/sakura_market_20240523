@@ -1,4 +1,6 @@
-devise_for :users
+devise_for :users, controllers: {
+  registrations: 'users/registrations'
+}
 
 resources :items, only: %i[show]
 
