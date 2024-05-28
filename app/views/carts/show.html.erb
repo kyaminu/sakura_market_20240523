@@ -1,0 +1,36 @@
+<% if user_signed_in? %>
+  <ul>
+    <% if current_cart_with_items.present? %>
+      <ul>
+        <% current_cart_with_items.each do |item| %>
+          <li><%= item.name %></li>
+        <% end %>
+      </ul>
+    <% else %>
+      <p>カートに商品はありません。</p>
+    <% end %>
+  </ul>
+<% else %>
+  <% if current_cart_with_items.present? %>
+    <ul>
+      <% current_cart_with_items.each do |cart_item| %>
+        <% item = Item.find(cart_item['item_id']) %>
+        <li><%= item.name %></li>
+        <li><%= cart_item['quantity'] %></li>
+      <% end %>
+    </ul>
+  <% else %>
+    <p>カートに商品はありません。</p>
+  <% end %>
+<% end %>
+
+<%# if current_cart_with_items.present? %>
+  <%# current_cart_with_items.each do |cart_item| %>
+    <%#= form_with url: cart_item_path(item_id: cart_item['item_id']), method: :patch, local: true do |form| %>
+      <%#= hidden_field_tag :item_id, cart_item['item_id'] %>
+      <%#= form.number_field :quantity, value: cart_item['quantity'], min: 1 %>
+      <%#= form.submit '更新' %>
+    <%# end %>
+    <%#= button_to '削除', cart_item_path(item_id: cart_item['item_id']), method: :delete %>
+  <%# end %>
+<%# end %>
