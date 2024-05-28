@@ -14,6 +14,7 @@
         </div>
 
         <div class="align-self-center">
+          <%# TODO: ログイン後の対応 %>
           <% if session[:cart]&.any? { |cart_item| cart_item['item_id'] == @item.id } %>
             <%= link_to '数量変更', cart_path, class: "btn btn-outline-primary" %>
           <% else %>
