@@ -4,6 +4,7 @@ devise_for :administrators, controllers: {
 
 namespace :administrators do
   resources :administrators, only: %i[index new edit create update destroy]
+  resources :users, only: %i[index edit update]
   resources :items, only: %i[new edit create update destroy] do
     member do
       put :move_lower
