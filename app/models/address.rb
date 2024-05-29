@@ -4,7 +4,8 @@ class Address < ApplicationRecord
 
   belongs_to :user
 
-  validates :name, presence: true
+  validates :name_kanji, presence: true
+  validates :name_kana, presence: true
   validates :phone_number, presence: true
   validates :postal_code, presence: true, format: { with: /\A\d{7}\z/ }
   validates :prefecture, presence: true

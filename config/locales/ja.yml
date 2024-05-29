@@ -22,7 +22,8 @@ ja:
         price_excluding_tax: 価格(税抜)
         published: 公開
       user:
-        name: 名前
+        name_kanji: 名前
+        name_kana: なまえ
         email: メールアドレス
         password: パスワード
         password_confirmation: パスワード確認

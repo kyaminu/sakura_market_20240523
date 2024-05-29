@@ -44,7 +44,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_29_122735) do
 
   create_table "addresses", force: :cascade do |t|
     t.bigint "user_id", null: false
-    t.string "name", null: false
+    t.string "name_kanji", null: false
+    t.string "name_kana", null: false
     t.string "phone_number", null: false
     t.string "postal_code", null: false
     t.integer "prefecture", null: false
