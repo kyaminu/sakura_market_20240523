@@ -1,47 +1,47 @@
 class Users::AddressesController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_address, only: %i[edit create update destroy]
+  before_action :set_address, only: %i[edit update destroy]
 
   def index
     @addresses = current_user.addresses.default_order
   end
 
   def new
-    @addresse = current_user.addresses.new
+    @address = current_user.addresses.new
   end
 
   def edit
   end
 
   def create
-    @addresse = current_user.addresses.new(address_params)
-    if @addresse.save
-      redirect_to addresses_path, notice: '登録しました'
+    @address = current_user.addresses.new(address_params)
+    if @address.save
+      redirect_to users_addresses_path, notice: '登録しました'
     else
       render :new
     end
   end
 
   def update
-    if @addresse.update(address_params)
-      redirect_to addresses_path, notice: '更新しました'
+    if @address.update(address_params)
+      redirect_to users_addresses_path, notice: '更新しました'
     else
       render :edit
     end
   end
 
   def destroy
-    @addresse.destroy!
-    redirect_to
+    @address.destroy!
+    redirect_to users_addresses_path
   end
 
   private
 
     def set_address
-      @addresse = Address.find(params[:id])
+      @address = Address.find(params[:id])
     end
 
     def address_params
-      params.require(:address).permit(%i[name_kanji name_kana phone_number postal_code prefecture city street])
+      params.require(:address).permit(%i[name_kanji name_kana phone_number postal_code prefecture_code city street])
     end
 end

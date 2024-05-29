@@ -1,6 +1,6 @@
 class Address < ApplicationRecord
   include JpPrefecture
-  jp_prefecture :prefecture_code, method_name: :prefecture
+  jp_prefecture :prefecture_code
 
   belongs_to :user
 
@@ -8,7 +8,7 @@ class Address < ApplicationRecord
   validates :name_kana, presence: true
   validates :phone_number, presence: true
   validates :postal_code, presence: true, format: { with: /\A\d{7}\z/ }
-  validates :prefecture, presence: true
+  validates :prefecture_code, presence: true
   validates :city, presence: true
   validates :street, presence: true
 
