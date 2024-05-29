@@ -22,13 +22,13 @@ ja:
         price_excluding_tax: 価格(税抜)
         published: 公開
       user:
-        name_kanji: 名前
-        name_kana: なまえ
+        name: 名前
         email: メールアドレス
         password: パスワード
         password_confirmation: パスワード確認
       address:
-        name: 名前
+        name_kanji: 名前
+        name_kana: なまえ
         phone_number: 電話番号
         postal_code: 郵便番号
         prefecture: 都道府県
