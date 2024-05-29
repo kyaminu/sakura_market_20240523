@@ -18,7 +18,7 @@ class Users::AddressesController < ApplicationController
     if @address.save
       redirect_to users_addresses_path, notice: '登録しました'
     else
-      render :new
+      render :new, status: :unprocessable_entity
     end
   end
 
@@ -26,13 +26,13 @@ class Users::AddressesController < ApplicationController
     if @address.update(address_params)
       redirect_to users_addresses_path, notice: '更新しました'
     else
-      render :edit
+      render :edit, status: :unprocessable_entity
     end
   end
 
   def destroy
     @address.destroy!
-    redirect_to users_addresses_path, notice: '削除しました'
+    redirect_to users_addresses_path, notice: '削除しました', status: :see_other
   end
 
   private
