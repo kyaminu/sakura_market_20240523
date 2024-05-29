@@ -5,7 +5,7 @@
       <%= f.input :name_kana %>
       <%= f.input :phone_number %>
       <%= f.input :postal_code %>
-      <%= f.input :prefecture_code, as: :select, collection: JpPrefecture::Prefecture.all.map { |prefecture| [prefecture.name, prefecture.code] }, prompt: '選択してください' %>
+      <%= f.input :prefecture_code, collection: JpPrefecture::Prefecture.all, label_method: :name, value_method: :code, as: :select %>
       <%= f.input :city %>
       <%= f.input :street %>
 
