@@ -5,7 +5,7 @@
     <%= link_to '住所の登録', new_users_address_path, class: 'btn btn-primary' %>
   </div>
 
-  <div class="d-flex flex-column">
+  <div class="d-flex col-md-8 flex-column">
     <% @addresses.each do |address| %>
       <div class="mb-3">
         <div class="card">
@@ -14,6 +14,7 @@
               <%= address.name_kanji %>
               (<%= address.name_kana %>)
             </p>
+            <p>TEL: <%= address.phone_number %></p>
             <div>
               〒<%= address.postal_code %>
               <br>

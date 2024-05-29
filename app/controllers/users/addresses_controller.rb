@@ -32,7 +32,7 @@ class Users::AddressesController < ApplicationController
 
   def destroy
     @address.destroy!
-    redirect_to users_addresses_path
+    redirect_to users_addresses_path, notice: '削除しました'
   end
 
   private
