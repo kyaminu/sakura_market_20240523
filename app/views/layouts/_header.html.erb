@@ -1,0 +1,35 @@
+<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-secondary">
+  <%= link_to 'さくらマーケット', root_path, class: 'navbar-brand ms-2' %>
+  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarCollapse">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <%= link_to '商品一覧', root_path, class: 'nav-link' %>
+      </li>
+      <%# TODO: userにもdevise入れたら対応 %>
+      <%# if user_signed_in? %>
+<!--        <li class="nav-item">-->
+          <%#= link_to 'カート', '#', class: 'nav-link' %>
+<!--        </li>-->
+<!--        <li class="nav-item">-->
+          <%#= link_to '注文履歴', '#', class: 'nav-link' %>
+<!--        </li>-->
+      <%# end %>
+    </ul>
+    <div class="ms-auto me-2">
+      <div class="d-flex">
+        <%# TODO: userにもdevise入れたら対応 %>
+        <%# if user_signed_in? %>
+          <%#= link_to 'アカウント', '#', class: 'btn btn-outline-light me-2' %>
+          <%#= button_to 'ログアウト', '#', method: :delete, class: 'btn btn-outline-light' %>
+        <%# else %>
+          <%#= link_to '新規登録', '#', class: 'btn btn-warning me-2' %>
+          <%#= link_to 'ログイン', '#', class: 'btn btn-outline-light' %>
+        <%# end %>
+      </div>
+    </div>
+  </div>
+</nav>
