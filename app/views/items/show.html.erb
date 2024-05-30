@@ -15,7 +15,7 @@
 
         <div class="align-self-center">
           <%# TODO: 未ログイン対応 %>
-          <% if current_user.cart.is_in?(@item) %>
+          <% if current_user.cart.include?(@item) %>
             <%= link_to '数量変更', cart_path, class: 'btn btn-outline-primary' %>
           <% else %>
             <%= button_to 'カートに追加', cart_items_path(item_id: @item), method: :post, class: "btn btn-primary" %>
