@@ -1,5 +1,4 @@
-class Users::AddressesController < ApplicationController
-  before_action :authenticate_user!
+class Users::AddressesController < Users::ApplicationController
   before_action :set_address, only: %i[edit update destroy]
 
   def index
