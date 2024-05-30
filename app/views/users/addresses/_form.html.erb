@@ -1,0 +1,18 @@
+<div class="row mb-3">
+  <div class="col-md-6 offset-md-3">
+    <%= simple_form_for address, url: url do |f| %>
+      <%= f.input :name_kanji %>
+      <%= f.input :name_kana %>
+      <%= f.input :phone_number %>
+      <%= f.input :postal_code %>
+      <%= f.input :prefecture_code, collection: JpPrefecture::Prefecture.all, label_method: :name, value_method: :code, as: :select %>
+      <%= f.input :city %>
+      <%= f.input :street %>
+
+      <div class="d-flex justify-content-between">
+        <%= f.button :submit, class: 'btn btn-primary' %>
+        <%= link_to '戻る', users_addresses_path, class: 'btn btn-outline-dark' %>
+      </div>
+    <% end %>
+  </div>
+</div>
