@@ -1,0 +1,10 @@
+<div class="mx-3">
+  <h1 class="fs-2"><%= title 'ユーザ編集' %></h1>
+
+  <%= simple_form_for @user, url: administrators_user_path(@user) do |f| %>
+    <%= f.input :name %>
+    <%= f.input :email %>
+
+    <%= f.button :submit, class: 'btn btn-primary'%>
+  <% end %>
+</div>

@@ -26,3 +26,11 @@ ja:
         email: メールアドレス
         password: パスワード
         password_confirmation: パスワード確認
+      address:
+        name_kanji: 名前
+        name_kana: なまえ
+        phone_number: 電話番号
+        postal_code: 郵便番号
+        prefecture_code: 都道府県
+        city: 市区町村
+        street: 以降の住所

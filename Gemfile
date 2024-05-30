@@ -9,6 +9,7 @@ gem "bootsnap", require: false
 gem "cssbundling-rails"
 gem 'devise'
 gem 'devise-i18n'
+gem 'jp_prefecture'
 gem "jsbundling-rails"
 gem 'image_processing'
 gem "meta-tags"
