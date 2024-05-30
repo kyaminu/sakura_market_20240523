@@ -2,6 +2,8 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable, :recoverable, :rememberable, :validatable
 
   has_many :addresses, dependent: :destroy
+  has_one :cart
+  after_create :create_cart
 
   validates :email, presence: true
 
@@ -17,4 +19,10 @@ class User < ApplicationRecord
     clean_up_passwords
     result
   end
+
+  private
+
+    def create_cart
+      self.create_cart!
+    end
 end
