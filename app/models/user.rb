@@ -2,7 +2,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable, :recoverable, :rememberable, :validatable
 
   has_many :addresses, dependent: :destroy
-  has_one :cart
+  has_one :cart, dependent: :destroy
   after_create :create_cart
 
   validates :email, presence: true
