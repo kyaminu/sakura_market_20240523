@@ -1,5 +1,7 @@
 FactoryBot.define do
   factory :cart do
-    user
+    trait :with_user do
+      user
+    end
   end
 end
