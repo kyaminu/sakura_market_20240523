@@ -23,7 +23,7 @@
                   <%= simple_form_for cart_item, url: cart_item_path(cart_item) do |f| %>
                     <div class="d-flex">
                       <div class="p-2">個数</div>
-                      <%= f.input :quantity, label: false, as: :select, collection: 1..30 %>
+                      <%= f.input :quantity, label: false, as: :select, collection: 1..20 %>
                       <%= f.submit '更新する' %>
                     </div>
                   <% end %>
