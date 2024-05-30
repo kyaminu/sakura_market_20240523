@@ -24,13 +24,13 @@
                     <div class="d-flex">
                       <div class="p-2">個数</div>
                       <%= f.input :quantity, label: false, as: :select, collection: 1..20 %>
-                      <%= f.submit '更新する' %>
+                      <%= f.submit '更新する', class: 'btn btn-sm btn-success m-2 mb-3' %>
                     </div>
                   <% end %>
                 </div>
 
                 <div class="d-flex justify-content-end">
-                  <%= button_to '削除', cart_item_path(cart_item), method: :delete, data: { turbo_confirm: 'カートから削除します。よろしいですか？' }, class: 'btn btn-small btn-danger' %>
+                  <%= button_to '削除', cart_item_path(cart_item), method: :delete, data: { turbo_confirm: 'カートから削除します。よろしいですか？' }, class: 'btn btn-sm btn-outline-danger' %>
                 </div>
               </div>
             </div>
