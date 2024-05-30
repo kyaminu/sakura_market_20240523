@@ -21,3 +21,8 @@ ja:
         image: 画像
         price_excluding_tax: 価格(税抜)
         published: 公開
+      user:
+        name: 名前
+        email: メールアドレス
+        password: パスワード
+        password_confirmation: パスワード確認

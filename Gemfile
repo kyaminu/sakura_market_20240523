@@ -25,6 +25,7 @@ group :development, :test do
   gem 'capybara'
   gem 'erb_lint', require: false
   gem 'factory_bot_rails'
+  gem 'letter_opener_web'
   gem 'selenium-webdriver'
   gem 'rspec-rails'
   gem 'rubocop', require: false

@@ -9,26 +9,24 @@
       <li class="nav-item active">
         <%= link_to '商品一覧', root_path, class: 'nav-link' %>
       </li>
-      <%# TODO: userにもdevise入れたら対応 %>
-      <%# if user_signed_in? %>
-<!--        <li class="nav-item">-->
-          <%#= link_to 'カート', '#', class: 'nav-link' %>
-<!--        </li>-->
-<!--        <li class="nav-item">-->
-          <%#= link_to '注文履歴', '#', class: 'nav-link' %>
-<!--        </li>-->
-      <%# end %>
+      <% if user_signed_in? %>
+        <li class="nav-item">
+          <%= link_to 'カート', '#', class: 'nav-link' %>
+        </li>
+        <li class="nav-item">
+          <%= link_to '注文履歴', '#', class: 'nav-link' %>
+        </li>
+      <% end %>
     </ul>
     <div class="ms-auto me-2">
       <div class="d-flex">
-        <%# TODO: userにもdevise入れたら対応 %>
-        <%# if user_signed_in? %>
-          <%#= link_to 'アカウント', '#', class: 'btn btn-outline-light me-2' %>
-          <%#= button_to 'ログアウト', '#', method: :delete, class: 'btn btn-outline-light' %>
-        <%# else %>
-          <%#= link_to '新規登録', '#', class: 'btn btn-warning me-2' %>
-          <%#= link_to 'ログイン', '#', class: 'btn btn-outline-light' %>
-        <%# end %>
+        <% if user_signed_in? %>
+          <%= link_to '会員情報', edit_user_registration_path, class: 'btn btn-outline-light me-2' %>
+          <%= button_to 'Log out', destroy_user_session_path, method: :delete, class: 'btn btn-outline-light' %>
+        <% else %>
+          <%= link_to 'Sign up', new_user_registration_path, class: 'btn btn-light me-2' %>
+          <%= link_to 'Log in', user_session_path, class: 'btn btn-outline-light' %>
+        <% end %>
       </div>
     </div>
   </div>
