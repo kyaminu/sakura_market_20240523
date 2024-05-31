@@ -3,7 +3,7 @@ class User < ApplicationRecord
 
   has_many :addresses, dependent: :destroy
   has_one :cart, dependent: :destroy
-  after_create :create_cart
+  after_create :create_cart!
 
   validates :email, presence: true
 
@@ -19,10 +19,4 @@ class User < ApplicationRecord
     clean_up_passwords
     result
   end
-
-  private
-
-    def create_cart
-      self.create_cart!
-    end
 end
