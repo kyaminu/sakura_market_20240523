@@ -1,10 +1,10 @@
 <div class="container">
   <h1 class="fs-2"><%= title 'カート' %></h1>
 
-  <% if @cart.cart_items.present? %>
+  <% if current_cart.cart_items.present? %>
     <div class="row justify-content-md-around">
       <div class="d-flex flex-column col-md-6">
-        <% @cart.cart_items.default_order.preload(:item).each do |cart_item| %>
+        <% current_cart.cart_items.default_order.preload(:item).each do |cart_item| %>
           <div class="mb-3">
             <div class="card">
               <div class="card-body">
@@ -43,7 +43,7 @@
           <div class="col-md">
             <div class="fw-bold fs-3 d-flex mb-3">
               <div class="text-start">小計</div>
-              <div class="ms-auto"><%= number_to_currency(@cart.subtotal) %></div>
+              <div class="ms-auto"><%= number_to_currency(current_cart.subtotal) %></div>
             </div>
             <div class="d-flex justify-content-md-around">
               <%= link_to 'レジに進む', '#', class: 'btn btn-primary me-2' %>
