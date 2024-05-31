@@ -4,7 +4,7 @@ class CartItemsController < ApplicationController
 
   def create
     @item = Item.find(params[:item_id])
-    @cart.cart_items.create!(item: @item)
+    current_cart.cart_items.create!(item: @item)
     redirect_to cart_path, notice: 'カートに追加しました'
   end
 
@@ -20,15 +20,11 @@ class CartItemsController < ApplicationController
 
   private
 
-  def set_cart
-    @cart = Cart.find_by(user_id: current_user.id)
-  end
+    def set_cart_item
+      @cart_item = current_cart.cart_items.find(params[:id])
+    end
 
-  def set_cart_item
-    @cart_item = @cart.cart_items.find(params[:id])
-  end
-
-  def cart_item_params
-    params.require(:cart_item).permit(:quantity)
-  end
+    def cart_item_params
+      params.require(:cart_item).permit(:quantity)
+    end
 end
