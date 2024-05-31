@@ -1,5 +1,4 @@
 class CartItemsController < ApplicationController
-  before_action :set_cart
   before_action :set_cart_item, only: %i[update destroy]
 
   def create
