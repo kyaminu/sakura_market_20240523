@@ -13,7 +13,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   def destroy
     super
-    session[:cart_id].clear
+    reset_session
   end
 
   protected
