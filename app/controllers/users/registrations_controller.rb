@@ -3,8 +3,12 @@
 class Users::RegistrationsController < Devise::RegistrationsController
   def create
     super
-    cart = Cart.find(session[:cart_id])
-    cart.update!(user_id: current_user.id)
+    if session[:cart_id].present?
+      cart = Cart.find(session[:cart_id])
+      cart.update!(user_id: current_user.id)
+    else
+      current_user.create_cart!
+    end
   end
 
   def destroy
