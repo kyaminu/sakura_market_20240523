@@ -3,9 +3,10 @@ class User < ApplicationRecord
 
   has_many :addresses, dependent: :destroy
   has_one :cart, dependent: :destroy
-  after_create :create_cart!
 
   validates :email, presence: true
+
+  after_create :create_cart!
 
   scope :default_order, -> { order(:id) }
 
