@@ -2,8 +2,11 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable, :recoverable, :rememberable, :validatable
 
   has_many :addresses, dependent: :destroy
+  has_one :cart, dependent: :destroy
 
   validates :email, presence: true
+
+  after_create :create_cart!
 
   scope :default_order, -> { order(:id) }
 
