@@ -18,4 +18,23 @@ class User < ApplicationRecord
     clean_up_passwords
     result
   end
+
+  def merge_cart(session_cart)
+    session_cart.cart_items.each do |session_item|
+      merge_cart_item(session_item)
+    end
+  end
+
+  private
+
+    def merge_cart_item(session_item)
+      user_cart_item = cart.cart_items.find_by(item_id: session_item.item_id)
+
+      if user_cart_item
+        user_cart_item.quantity += session_item.quantity
+        user_cart_item.save
+      else
+        cart.cart_items.create!(item_id: session_item.item_id, quantity: session_item.quantity)
+      end
+    end
 end
