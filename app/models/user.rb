@@ -20,8 +20,10 @@ class User < ApplicationRecord
   end
 
   def merge_cart(session_cart)
-    session_cart.cart_items.each do |session_item|
-      merge_cart_item(session_item)
+    ActiveRecord::Base.transaction do
+      session_cart.cart_items.each do |session_item|
+        merge_cart_item(session_item)
+      end
     end
   end
 
@@ -32,7 +34,7 @@ class User < ApplicationRecord
 
       if user_cart_item
         user_cart_item.quantity += session_item.quantity
-        user_cart_item.save
+        user_cart_item.save!
       else
         cart.cart_items.create!(item_id: session_item.item_id, quantity: session_item.quantity)
       end
