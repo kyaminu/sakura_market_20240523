@@ -128,17 +128,15 @@ describe 'カート機能', type: :system do
     end
 
     describe 'アカウント持ち' do
-      it 'ログイン中の商品有のカートと、ログイン前の商品有のカートが、ログインした後にカートの中身がマージされていること' do
-        user = create(:user, :with_cart, email: 'test@example.com', password: 'password')
+      it 'ログイン中の商品有のカートと、ログイン前の商品有のカートが、ログインした後にカートの中身がマージされていること', js: true do
+        create(:user, :with_cart, email: 'test@example.com', password: 'password')
         create(:item, :published, name: 'トマト')
 
-        sign_in user
-
-        # visit new_user_session_path
-        # fill_in 'user[email]', with: 'test@example.com'
-        # fill_in 'user[password]', with: 'password'
-        # find(:test_class, 'login_button').click
-        # expect(page).to have_content 'ログインしました'
+        visit new_user_session_path
+        fill_in 'user[email]', with: 'test@example.com'
+        fill_in 'user[password]', with: 'password'
+        find(:test_class, 'login_button').click
+        expect(page).to have_content 'ログインしました'
 
         visit root_path
         click_on 'カートに追加'
@@ -151,13 +149,11 @@ describe 'カート機能', type: :system do
         expect(page).to have_content 'トマト'
         expect(page).to have_field('cart_item[quantity]', with: 1)
 
-        sign_in user, scope: :user
-        # visit new_user_session_path
-        # fill_in 'user[email]', with: 'test@example.com'
-        # fill_in 'user[password]', with: 'password'
-        # debugger
-        # find(:test_class, 'login_button').click
-        # expect(page).to have_content 'ログインしました'
+        visit new_user_session_path
+        fill_in 'user[email]', with: 'test@example.com'
+        fill_in 'user[password]', with: 'password'
+        find(:test_class, 'login_button').click
+        expect(page).to have_content 'ログインしました'
 
         visit cart_path
         expect(page).to have_content 'トマト'
