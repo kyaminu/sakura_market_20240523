@@ -9,11 +9,8 @@ class Users::RegistrationsController < Devise::RegistrationsController
     else
       current_user.create_cart!
     end
-  end
 
-  def destroy
-    super
-    reset_session
+    session[:cart_id] = nil
   end
 
   protected

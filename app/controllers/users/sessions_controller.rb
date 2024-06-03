@@ -1,6 +1,5 @@
 class Users::SessionsController < Devise::SessionsController
-  def destroy
-    super
-    reset_session
+  def create
+    session[:cart_id] = nil
   end
 end
