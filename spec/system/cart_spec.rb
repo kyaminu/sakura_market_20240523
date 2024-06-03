@@ -1,10 +1,9 @@
 require 'rails_helper'
 
 describe 'カート機能', type: :system do
-  let(:user) { create(:user) }
-
   describe 'ログイン済ユーザのカート機能' do
     before do
+      user = create(:user, :with_cart)
       sign_in user
     end
 
@@ -130,22 +129,36 @@ describe 'カート機能', type: :system do
 
     describe 'アカウント持ち' do
       it 'ログイン中の商品有のカートと、ログイン前の商品有のカートが、ログインした後にカートの中身がマージされていること' do
+        user = create(:user, :with_cart, email: 'test@example.com', password: 'password')
         create(:item, :published, name: 'トマト')
-        # cart = create(:cart)
-        # session[:cart_id] = cart.id
-        # allow_any_instance_of(ActionDispatch::Request).to receive(:session).and_return( cart_id: cart.id )
 
-        # sign_in user
+        sign_in user
+
+        # visit new_user_session_path
+        # fill_in 'user[email]', with: 'test@example.com'
+        # fill_in 'user[password]', with: 'password'
+        # find(:test_class, 'login_button').click
+        # expect(page).to have_content 'ログインしました'
+
         visit root_path
         click_on 'カートに追加'
         expect(page).to have_content 'トマト'
         expect(page).to have_field('cart_item[quantity]', with: 1)
 
-        # click_on 'Log out'
+        click_on 'Log out'
+        expect(page).to have_content 'ログアウトしました'
         click_on 'カートに追加'
+        expect(page).to have_content 'トマト'
         expect(page).to have_field('cart_item[quantity]', with: 1)
 
-        sign_in user
+        sign_in user, scope: :user
+        # visit new_user_session_path
+        # fill_in 'user[email]', with: 'test@example.com'
+        # fill_in 'user[password]', with: 'password'
+        # debugger
+        # find(:test_class, 'login_button').click
+        # expect(page).to have_content 'ログインしました'
+
         visit cart_path
         expect(page).to have_content 'トマト'
         expect(page).to have_field('cart_item[quantity]', with: 2)
