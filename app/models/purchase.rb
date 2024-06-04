@@ -2,6 +2,7 @@ class Purchase < ApplicationRecord
   extend Enumerize
 
   belongs_to :user, optional: true
+  has_many :purchase_items
 
   enumerize :delivery_time, in:
     %i[
