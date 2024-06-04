@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_05_30_054948) do
+ActiveRecord::Schema[7.1].define(version: 2024_06_04_041536) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -97,6 +97,22 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_30_054948) do
     t.index ["name"], name: "index_items_on_name", unique: true
   end
 
+  create_table "purchases", force: :cascade do |t|
+    t.integer "delivery_fee", null: false
+    t.integer "handling_fee", null: false
+    t.decimal "tax_rate", precision: 4, scale: 2, default: "0.1", null: false
+    t.date "delivery_on", null: false
+    t.string "delivery_time", null: false
+    t.string "name", null: false
+    t.string "phone_number", null: false
+    t.string "postal_code", null: false
+    t.string "address", null: false
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_purchases_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "name", default: "", null: false
     t.string "email", default: "", null: false
@@ -116,4 +132,5 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_30_054948) do
   add_foreign_key "cart_items", "carts"
   add_foreign_key "cart_items", "items"
   add_foreign_key "carts", "users"
+  add_foreign_key "purchases", "users"
 end
