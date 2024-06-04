@@ -1,5 +1,5 @@
 <div class="container">
-  <h1 class="fs-2">
+  <h1 class="fs-2 mb-5">
     <%= title @item.name %>
   </h1>
   <div class="d-flex justify-content-around">
@@ -22,7 +22,7 @@
         </div>
       </div>
 
-      <%= @item.description %>
+      <%= simple_format(h(@item.description)) %>
       <div class="text-end my-3">
         <%= link_to '他の商品を見る', root_path, class: 'btn btn-secondary' %>
       </div>

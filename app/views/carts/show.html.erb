@@ -10,13 +10,16 @@
               <div class="card-body">
                 <%= link_to item_path(cart_item.item), class: 'cart_item-link' do %>
                   <%= image_tag(cart_item.item.image.variant(:full)) %>
-                  <div>
+                  <div class="mt-3">
                     <p>
                       <%= cart_item.item.name %>
                       <%= number_to_currency(cart_item.item.price_included_tax) %>
                     </p>
                   </div>
-                  <%= cart_item.item.description %>
+                  <%#= cart_item.item.description %>
+                  <div class="card-text text-truncate mb-3">
+                    <%= cart_item.item.description %>
+                  </div>
                 <% end %>
 
                 <div class="d-flex justify-content-end">
