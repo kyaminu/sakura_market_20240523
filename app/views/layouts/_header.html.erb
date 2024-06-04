@@ -9,10 +9,10 @@
       <li class="nav-item active">
         <%= link_to '商品一覧', root_path, class: 'nav-link' %>
       </li>
+      <li class="nav-item">
+        <%= link_to 'カート', cart_path, class: 'nav-link' %>
+      </li>
       <% if user_signed_in? %>
-        <li class="nav-item">
-          <%= link_to 'カート', cart_path, class: 'nav-link' %>
-        </li>
         <li class="nav-item">
           <%= link_to '注文履歴', '#', class: 'nav-link' %>
         </li>
