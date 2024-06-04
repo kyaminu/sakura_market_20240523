@@ -5,8 +5,7 @@ class PurchaseItem < ApplicationRecord
     attachable.variant(:thumb, resize_to_fill: [120, 80])
   end
 
-  validates :purchase_id, uniqueness: true
-  validates :item_id, presence: true
+  validates :item_id, presence: true, uniqueness: { scope: :purchase_id　}
   validates :item_name, presence: true
   validates :item_description, presence: true
   validates :item_price_excluding_tax, presence: true

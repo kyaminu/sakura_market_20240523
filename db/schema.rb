@@ -107,7 +107,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_04_043936) do
     t.bigint "purchase_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["purchase_id"], name: "index_purchase_items_on_purchase_id", unique: true
+    t.index ["purchase_id", "item_id"], name: "index_purchase_items_on_purchase_id_and_item_id", unique: true
   end
 
   create_table "purchases", force: :cascade do |t|
