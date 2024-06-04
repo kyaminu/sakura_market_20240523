@@ -4,7 +4,7 @@ class Users::SessionsController < Devise::SessionsController
 
     if user_signed_in? && session[:cart_id].present?
       session_cart = Cart.find(session[:cart_id])
-      current_user.merge_cart(session_cart)
+      current_user.merge_cart!(session_cart)
       session[:cart_id] = nil
     end
   end
