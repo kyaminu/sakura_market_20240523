@@ -5,13 +5,13 @@ class Purchase < ApplicationRecord
 
   enumerize :delivery_time, in:
     %i[
-      eight_to_twelve
-      twelve_to_two
-      two_to_four
-      four_to_six
-      six_to_eight
-      eight_to_nine
-    ],default: :eight_to_twelve
+      time8_12
+      time12_14
+      time14_16
+      time16_18
+      time18_20
+      time20_21
+    ],default: :time8_12
 
   validates :delivery_fee, presence: true, numericality: { greater_than_or_equal_to: 600 }
   validates :handling_fee, presence: true, numericality: { greater_than_or_equal_to: 300, less_than_or_equal_to: 900 }
