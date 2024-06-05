@@ -4,4 +4,10 @@ FactoryBot.define do
     sequence(:email) { |index| "administration-#{index}@example.com" }
     password { 'password' }
   end
+
+  trait :with_cart do
+    transient do
+      cart
+    end
+  end
 end
