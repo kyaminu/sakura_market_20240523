@@ -12,12 +12,12 @@ ja:
   enumerize:
     purchase:
       delivery_time:
-        eight_to_twelve: 8時〜12時
-        twelve_to_two: 12時〜14時
-        two_to_four: 14時〜16時
-        four_to_six: 16時〜18時
-        six_to_eight: 18時〜20時
-        eight_to_nine: 20時〜21時
+        time8_12: 8時〜12時
+        time12_14: 12時〜14時
+        time14_16: 14時〜16時
+        time16_18: 16時〜18時
+        time18_20: 18時〜20時
+        time20_21: 20時〜21時
   activerecord:
     attributes:
       administrator:
