@@ -12,7 +12,8 @@ class Purchase < ApplicationRecord
       time16_18
       time18_20
       time20_21
-    ],default: :time8_12
+    ]
+  attribute :delivery_time, :string, default: :time8_12
 
   validates :delivery_fee, presence: true, numericality: { greater_than_or_equal_to: 600 }
   validates :handling_fee, presence: true, numericality: { greater_than_or_equal_to: 300, less_than_or_equal_to: 900 }
