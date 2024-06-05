@@ -8,6 +8,7 @@ class Users::PurchasesController < Users::ApplicationController
     if @purchase.save
       # TODO: まだ履歴画面作ってないので一旦ここに返す
       redirect_to root_path, notice: '商品を購入しました。'
+      current_cart.cart_items.delete_all
     else
       render :new, status: :unprocessable_entity
     end
