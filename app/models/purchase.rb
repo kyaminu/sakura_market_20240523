@@ -25,4 +25,31 @@ class Purchase < ApplicationRecord
   validates :address, presence: true
 
   scope :default_order, -> { order(created_at: :desc) }
+
+  def delivery_fee_value
+    delivery_fee = 600
+    if user.cart.cart_items.count > 5
+      delivery_fee += (user.cart.cart_items.count / 5) * 600
+    end
+
+    (delivery_fee * (1 + tax_rate)).floor
+  end
+
+  def handling_fee_value
+    case user.cart.subtotal
+    when 1..9999
+      handling_fee = 300
+    when 10000..29999
+      handling_fee = 400
+    when 30000..99999
+      handling_fee = 600
+    else
+      handling_fee = 1000
+    end
+    (handling_fee * (1 + tax_rate)).floor
+  end
+
+  def total_value
+    [user.cart.subtotal, delivery_fee_value, handling_fee_value].sum
+  end
 end
