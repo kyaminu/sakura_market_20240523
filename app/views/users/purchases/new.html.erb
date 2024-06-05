@@ -50,6 +50,7 @@
               <%= f.input :delivery_fee, label: false, readonly: true, input_html: { value: @purchase.delivery_fee_value, class: 'd-none' } %>
               <%= f.input :handling_fee, label: false, readonly: true, input_html: { value: @purchase.handling_fee_value, class: 'd-none' } %>
 
+              <%# TODO: 営業日内で選択できるように %>
               <%= f.input :delivery_on %>
               <%= f.input :delivery_time, collection: Purchase.delivery_time.options %>
 
