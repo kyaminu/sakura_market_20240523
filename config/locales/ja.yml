@@ -9,6 +9,15 @@ ja:
         format: "%u%n"
         delimiter: ","
         precision: 0
+  enumerize:
+    purchase:
+      delivery_time:
+        time8_12: 8時〜12時
+        time12_14: 12時〜14時
+        time14_16: 14時〜16時
+        time16_18: 16時〜18時
+        time18_20: 18時〜20時
+        time20_21: 20時〜21時
   activerecord:
     attributes:
       administrator:
@@ -34,3 +43,12 @@ ja:
         prefecture_code: 都道府県
         city: 市区町村
         street: 以降の住所
+      purchase:
+        delivery_fee: 送料
+        handling_fee: 手数料
+        delivery_on: 希望配送日
+        delivery_time: 希望時間
+        name: お届け先
+        phone_number: 電話番号
+        postal_code: 郵便番号
+        address: 住所

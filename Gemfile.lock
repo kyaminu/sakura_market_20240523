@@ -122,6 +122,8 @@ GEM
       devise (>= 4.9.0)
     diff-lcs (1.5.1)
     drb (2.2.1)
+    enumerize (2.8.1)
+      activesupport (>= 3.2)
     erb_lint (0.5.0)
       activesupport
       better_html (>= 2.0.1)
@@ -358,6 +360,7 @@ DEPENDENCIES
   debug
   devise
   devise-i18n
+  enumerize
   erb_lint
   factory_bot_rails
   image_processing
