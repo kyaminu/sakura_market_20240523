@@ -19,6 +19,9 @@
                   <div class="card-text text-truncate mb-3">
                     <%= cart_item.item.description %>
                   </div>
+                  <div class="text-end">
+                    個数: <%= cart_item.quantity %>
+                  </div>
                 <% end %>
               </div>
             </div>
@@ -50,8 +53,21 @@
               <%= f.input :delivery_fee, label: false, readonly: true, input_html: { value: @purchase.delivery_fee_value, class: 'd-none' } %>
               <%= f.input :handling_fee, label: false, readonly: true, input_html: { value: @purchase.handling_fee_value, class: 'd-none' } %>
 
-              <%# TODO: 営業日内で選択できるように %>
-              <%= f.input :delivery_on %>
+              <div
+                data-controller="datepicker"
+                data-datepicker-min-value="<%= 3.business_days.after(Date.today).to_date %>"
+                data-datepicker-max-value="<%= 14.business_days.after(Date.today).to_date %>"
+                data-datepicker-allow-weekends-value="false">
+                <%= f.label :delivery_on %>
+                <div class="d-flex justify-content-between">
+                  <div class="col-md-10">
+                  <%= f.input :delivery_on, as: :string, readonly: true, label: false, input_html: { data: { datepicker_target: 'input' } } %>
+                  </div>
+                  <div class="select-date-button">
+                    <div class="btn btn-primary" data-datepicker-target="toggle">選択</div>
+                  </div>
+                </div>
+              </div>
               <%= f.input :delivery_time, collection: Purchase.delivery_time.options %>
               <% if current_user.addresses.present? %>
                 <%= f.input :address_id, collection: current_user.addresses, label_method: :address_options %>
