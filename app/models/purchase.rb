@@ -22,9 +22,6 @@ class Purchase < ApplicationRecord
   validates :delivery_time, presence: true
   validates :address_id, presence: true
 
-  before_save :set_address
-  before_save :set_item_image
-
   scope :default_order, -> { order(created_at: :desc) }
 
   def delivery_fee_value
@@ -67,26 +64,22 @@ class Purchase < ApplicationRecord
     end
   end
 
-  private
+  def build_address
+    selected_address = user.addresses.find(address_id)
 
-    def set_address
-      selected_address = user.addresses.find(address_id)
+    if selected_address
+      self.name = selected_address.name_kanji
+      self.phone_number = selected_address.phone_number
+      self.postal_code = selected_address.postal_code
+      self.address = selected_address.full_address
+    end
+  end
 
-      if selected_address
-        self.name = selected_address.name_kanji
-        self.phone_number = selected_address.phone_number
-        self.postal_code = selected_address.postal_code
-        self.address = selected_address.full_address
+  def attach_item_image
+    user.cart.cart_items.each do |cart_item|
+      purchase_items.each do |purchase_item|
+        purchase_item.item_image.attach(cart_item.item.image.blob)
       end
     end
-
-    def set_item_image
-      ActiveRecord::Base.transaction do
-        user.cart.cart_items.each do |cart_item|
-          purchase_items.each do |purchase_item|
-            purchase_item.item_image.attach(cart_item.item.image.blob)
-          end
-        end
-      end
-    end
+  end
 end
