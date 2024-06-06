@@ -53,11 +53,11 @@
               <%# TODO: 営業日内で選択できるように %>
               <%= f.input :delivery_on %>
               <%= f.input :delivery_time, collection: Purchase.delivery_time.options %>
-
-              <%= f.input :name %>
-              <%= f.input :phone_number %>
-              <%= f.input :postal_code %>
-              <%= f.input :address, collection: current_user.addresses, label_method: :user_address %>
+              <% if current_user.addresses.present? %>
+                <%= f.input :address_id, collection: current_user.addresses, label_method: :address_options %>
+              <% else %>
+                <%= link_to 'お届け先を設定する', new_users_address_path, class: 'btn btn-primary' %>
+              <% end %>
 
               <div class="d-flex justify-content-around mt-5">
                 <%= f.button :submit, "購入する", class: 'btn btn-lg btn-outline-dark px-3' %>

@@ -14,7 +14,10 @@ class Address < ApplicationRecord
 
   scope :default_order, -> { order(created_at: :desc) }
 
-  def user_address
-    "#{name_kanji} 〒#{postal_code} #{prefecture.name}#{city}#{street}"
+  def full_address
+    "#{prefecture.name}#{city}#{street}"
+  end
+  def address_options
+    "#{name_kanji} 〒#{postal_code} #{full_address}"
   end
 end

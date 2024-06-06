@@ -14,15 +14,15 @@ class Purchase < ApplicationRecord
       time20_21
     ]
   attribute :delivery_time, :string, default: :time8_12
+  attr_accessor :address_id
 
   validates :delivery_fee, presence: true, numericality: { greater_than_or_equal_to: 600 }
   validates :handling_fee, presence: true, numericality: { greater_than_or_equal_to: 300, less_than_or_equal_to: 900 }
   validates :delivery_on, presence: true
   validates :delivery_time, presence: true
-  validates :name, presence: true
-  validates :phone_number, presence: true
-  validates :postal_code, presence: true
-  validates :address, presence: true
+  validates :address_id, presence: true
+
+  before_save :set_address
 
   scope :default_order, -> { order(created_at: :desc) }
 
@@ -52,4 +52,17 @@ class Purchase < ApplicationRecord
   def total_value
     [user.cart.subtotal, delivery_fee_value, handling_fee_value].sum
   end
+
+  private
+
+    def set_address
+      selected_address = user.addresses.find(address_id)
+
+      if selected_address
+        self.name = selected_address.name_kanji
+        self.phone_number = selected_address.phone_number
+        self.postal_code = selected_address.postal_code
+        self.address = selected_address.full_address
+      end
+    end
 end
