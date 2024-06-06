@@ -23,6 +23,7 @@ class Purchase < ApplicationRecord
   validates :address_id, presence: true
 
   before_save :set_address
+  before_save :set_item_image
 
   scope :default_order, -> { order(created_at: :desc) }
 
@@ -53,6 +54,19 @@ class Purchase < ApplicationRecord
     [user.cart.subtotal, delivery_fee_value, handling_fee_value].sum
   end
 
+  def build_purchase_items
+    user.cart.cart_items.each do |cart_item|
+      purchase_items.build(
+        item_id: cart_item.item.id,
+        item_name: cart_item.item.name,
+        item_description: cart_item.item.description,
+        item_price_excluding_tax: cart_item.item.price_excluding_tax,
+        item_tax_rate: cart_item.item.tax_rate,
+        quantity: cart_item.quantity
+      )
+    end
+  end
+
   private
 
     def set_address
@@ -63,6 +77,16 @@ class Purchase < ApplicationRecord
         self.phone_number = selected_address.phone_number
         self.postal_code = selected_address.postal_code
         self.address = selected_address.full_address
+      end
+    end
+
+    def set_item_image
+      ActiveRecord::Base.transaction do
+        user.cart.cart_items.each do |cart_item|
+          purchase_items.each do |purchase_item|
+            purchase_item.item_image.attach(cart_item.item.image.blob)
+          end
+        end
       end
     end
 end

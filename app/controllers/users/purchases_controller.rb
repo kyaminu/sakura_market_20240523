@@ -4,7 +4,11 @@ class Users::PurchasesController < Users::ApplicationController
   end
 
   def create
-    @purchase = current_user.purchases.new(purchase_params)
+    ActiveRecord::Base.transaction do
+      @purchase = current_user.purchases.build(purchase_params)
+      @purchase.build_purchase_items
+    end
+
     if @purchase.save
       # TODO: まだ履歴画面作ってないので一旦ここに返す
       redirect_to root_path, notice: '商品を購入しました。'
