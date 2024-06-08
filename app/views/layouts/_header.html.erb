@@ -14,7 +14,7 @@
       </li>
       <% if user_signed_in? %>
         <li class="nav-item">
-          <%= link_to '注文履歴', '#', class: 'nav-link' %>
+          <%= link_to '注文履歴', users_purchases_path, class: 'nav-link' %>
         </li>
       <% end %>
     </ul>
