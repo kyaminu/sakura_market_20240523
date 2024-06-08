@@ -1,7 +1,7 @@
 class Purchase < ApplicationRecord
   extend Enumerize
 
-  belongs_to :user, optional: true
+  belongs_to :user, optional: true # NOTE: ユーザー削除されても、履歴は残すようためにoptional: trueしてる
   has_many :purchase_items
 
   enumerize :delivery_time, in:
