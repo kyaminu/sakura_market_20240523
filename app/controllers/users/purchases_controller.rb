@@ -6,7 +6,7 @@ class Users::PurchasesController < Users::ApplicationController
   def create
     ActiveRecord::Base.transaction do
       @purchase = current_user.purchases.build(purchase_params)
-      @purchase.build_address
+      @purchase.set_address
       @purchase.build_purchase_items
       @purchase.copy_item_image
     end

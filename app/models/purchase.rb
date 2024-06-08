@@ -64,7 +64,7 @@ class Purchase < ApplicationRecord
     end
   end
 
-  def build_address
+  def set_address
     selected_address = user.addresses.find(address_id)
 
     if selected_address
