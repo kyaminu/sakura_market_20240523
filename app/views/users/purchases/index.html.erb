@@ -1,0 +1,36 @@
+<div class="container">
+  <h1 class="fs-2"><%= title '注文履歴' %></h1>
+
+  <% if @purchases.present? %>
+    <div class="d-flex flex-column">
+      <% @purchases.each do |purchase| %>
+        <div class="mb-3">
+          <%= link_to users_purchase_path(purchase), class: 'purchase_index-link' do %>
+            <div class="card">
+              <div class="card-body">
+                <div class="fs-4"><%= l purchase.created_at %>購入分</div>
+                <div class="mt-2">
+                  合計金額:
+                  <%= number_to_currency(
+                    purchase.total_value(
+                      purchase.purchase_item_subtotal,
+                      purchase.delivery_fee_value(purchase.purchase_items.count),
+                      purchase.handling_fee_value(purchase.purchase_item_subtotal)
+                    )
+                  ) %>
+                </div>
+                <div>
+                  配送日時:
+                  <%= l purchase.delivery_on %>
+                  <%= purchase.delivery_time.text %>
+                </div>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  <% else %>
+    まだ商品は購入していません。
+  <% end %>
+</div>
