@@ -4,17 +4,10 @@ class Users::PurchasesController < Users::ApplicationController
   end
 
   def create
-    ActiveRecord::Base.transaction do
-      @purchase = current_user.purchases.build(purchase_params)
-      @purchase.set_address
-      @purchase.build_purchase_items
-      @purchase.copy_item_image
-    end
-
-    if @purchase.save
+    @purchase = current_user.purchases.build(purchase_params)
+    if @purchase.purchase_items_from_cart(current_cart)
       # TODO: まだ履歴画面作ってないので一旦ここに返す
       redirect_to root_path, notice: '商品を購入しました。'
-      current_cart.cart_items.destroy_all
     else
       render :new, status: :unprocessable_entity
     end
