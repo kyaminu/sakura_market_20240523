@@ -24,17 +24,21 @@ class Purchase < ApplicationRecord
 
   scope :default_order, -> { order(created_at: :desc) }
 
-  def delivery_fee_value
+  def delivery_fee_value(item_count)
     delivery_fee = 600
-    if user.cart.cart_items.count > 5
-      delivery_fee += (user.cart.cart_items.count / 5) * 600
+    if item_count > 5
+      delivery_fee += (item_count / 5) * 600
     end
 
     (delivery_fee * (1 + tax_rate)).floor
   end
 
-  def handling_fee_value
-    case user.cart.subtotal
+  def purchase_item_subtotal
+    purchase_items.sum { |purchase_item| (purchase_item.item_price_excluding_tax * (1 + purchase_item.item_tax_rate)).floor * purchase_item.quantity }
+  end
+
+  def handling_fee_value(subtotal)
+    case subtotal
     when 1..9999
       handling_fee = 300
     when 10000..29999
@@ -47,8 +51,8 @@ class Purchase < ApplicationRecord
     (handling_fee * (1 + tax_rate)).floor
   end
 
-  def total_value
-    [user.cart.subtotal, delivery_fee_value, handling_fee_value].sum
+  def total_value(subtotal, delivery_fee, handling_fee)
+    [subtotal, delivery_fee, handling_fee].sum
   end
 
   def build_purchase_items
