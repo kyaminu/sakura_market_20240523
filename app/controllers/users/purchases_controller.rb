@@ -8,7 +8,7 @@ class Users::PurchasesController < Users::ApplicationController
       @purchase = current_user.purchases.build(purchase_params)
       @purchase.build_address
       @purchase.build_purchase_items
-      @purchase.attach_item_image
+      @purchase.copy_item_image
     end
 
     if @purchase.save

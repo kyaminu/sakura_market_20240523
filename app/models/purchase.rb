@@ -75,7 +75,7 @@ class Purchase < ApplicationRecord
     end
   end
 
-  def attach_item_image
+  def copy_item_image
     user.cart.cart_items.each do |cart_item|
       purchase_items.each do |purchase_item|
         purchase_item.item_image.attach(cart_item.item.image.blob)
