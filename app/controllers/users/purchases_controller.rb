@@ -1,6 +1,14 @@
 class Users::PurchasesController < Users::ApplicationController
+  def index
+    @purchase = current_user.purchases.default_order
+  end
+
   def new
     @purchase = current_user.purchases.new
+  end
+
+  def show
+    @purchase = current_user.purchases.find(params[:id])
   end
 
   def create
