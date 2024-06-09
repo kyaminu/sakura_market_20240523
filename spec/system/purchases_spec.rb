@@ -1,5 +1,3 @@
-require 'rails_helper'
-
 describe '購入ページ', type: :system do
   let(:user) { create(:user, :with_cart) }
   before do
