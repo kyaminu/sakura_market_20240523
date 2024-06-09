@@ -1,7 +1,7 @@
 class Purchase < ApplicationRecord
   extend Enumerize
 
-  belongs_to :user, optional: true
+  belongs_to :user, optional: true # NOTE: ユーザー削除されても、履歴は残すようためにoptional: trueしてる
   has_many :purchase_items
 
   enumerize :delivery_time, in:
@@ -14,7 +14,7 @@ class Purchase < ApplicationRecord
       time20_21
     ]
   attribute :delivery_time, :string, default: :time8_12
-  attr_accessor :address_id
+  attr_accessor :address_id # NOTE: 届け先住所検索するために、住所idを一時的に取得する用
 
   validates :delivery_fee, presence: true, numericality: { greater_than_or_equal_to: 600 }
   validates :handling_fee, presence: true, numericality: { greater_than_or_equal_to: 300, less_than_or_equal_to: 900 }
@@ -55,35 +55,49 @@ class Purchase < ApplicationRecord
     [subtotal, delivery_fee, handling_fee].sum
   end
 
-  def build_purchase_items
-    user.cart.cart_items.each do |cart_item|
-      purchase_items.build(
-        item_id: cart_item.item.id,
-        item_name: cart_item.item.name,
-        item_description: cart_item.item.description,
-        item_price_excluding_tax: cart_item.item.price_excluding_tax,
-        item_tax_rate: cart_item.item.tax_rate,
-        quantity: cart_item.quantity
-      )
+  def purchase_items_from_cart(current_cart)
+    set_address
+    build_purchase_items(current_cart)
+    copy_item_image(current_cart)
+
+    ActiveRecord::Base.transaction do
+      current_cart.cart_items.each { |cart_item| cart_item.destroy! }
+      save!
     end
+    true
+  rescue ActiveRecord::RecordInvalid, ActiveRecord::RecordNotDestroyed => e
+    false
   end
 
-  def build_address
-    selected_address = user.addresses.find(address_id)
+  private
 
-    if selected_address
-      self.name = selected_address.name_kanji
-      self.phone_number = selected_address.phone_number
-      self.postal_code = selected_address.postal_code
-      self.address = selected_address.full_address
-    end
-  end
-
-  def attach_item_image
-    user.cart.cart_items.each do |cart_item|
-      purchase_items.each do |purchase_item|
-        purchase_item.item_image.attach(cart_item.item.image.blob)
+    def build_purchase_items(current_cart)
+      current_cart.cart_items.each do |cart_item|
+        purchase_items.build(
+          item_id: cart_item.item.id,
+          item_name: cart_item.item.name,
+          item_description: cart_item.item.description,
+          item_price_excluding_tax: cart_item.item.price_excluding_tax,
+          item_tax_rate: cart_item.item.tax_rate,
+          quantity: cart_item.quantity
+        )
       end
     end
-  end
+
+    def set_address
+      selected_address = user.addresses.find(address_id)
+
+      if selected_address
+        self.name = selected_address.name_kanji
+        self.phone_number = selected_address.phone_number
+        self.postal_code = selected_address.postal_code
+        self.address = selected_address.full_address
+      end
+    end
+
+    def copy_item_image(current_cart)
+      purchase_items.each_with_index do |purchase_item, index|
+        purchase_item.item_image.attach(current_cart.cart_items[index].item.image.blob)
+      end
+    end
 end
