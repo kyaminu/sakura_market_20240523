@@ -6,6 +6,7 @@ gem "rails", "~> 7.1.3.3"
 
 gem 'acts_as_list'
 gem "bootsnap", require: false
+gem 'business_time'
 gem "cssbundling-rails"
 gem 'devise'
 gem 'devise-i18n'

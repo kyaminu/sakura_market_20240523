@@ -94,6 +94,9 @@ GEM
     bootsnap (1.18.3)
       msgpack (~> 1.2)
     builder (3.2.4)
+    business_time (0.13.0)
+      activesupport (>= 3.2.0)
+      tzinfo
     capybara (3.40.0)
       addressable
       matrix
@@ -361,6 +364,7 @@ PLATFORMS
 DEPENDENCIES
   acts_as_list
   bootsnap
+  business_time
   capybara
   cssbundling-rails
   debug
