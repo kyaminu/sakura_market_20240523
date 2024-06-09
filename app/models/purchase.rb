@@ -52,13 +52,17 @@ class Purchase < ApplicationRecord
   end
 
   def purchase_items_from_cart(current_cart)
+    set_address
+    build_purchase_items(current_cart)
+    copy_item_image(current_cart)
+
     ActiveRecord::Base.transaction do
-      set_address
-      build_purchase_items(current_cart)
-      copy_item_image(current_cart)
+      current_cart.cart_items.each { |cart_item| cart_item.destroy! }
       save!
-      current_cart.cart_items.destroy_all
     end
+    true
+  rescue ActiveRecord::RecordInvalid, ActiveRecord::RecordNotDestroyed => e
+    false
   end
 
   private
