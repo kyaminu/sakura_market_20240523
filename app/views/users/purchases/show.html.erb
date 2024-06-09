@@ -13,7 +13,7 @@
 
       <% @purchase.purchase_items.each do |purchase_item| %>
         <div class="mb-3">
-          <%= link_to item_path(purchase_item.item_id) do %>
+          <%= link_to item_path(purchase_item.item_id), class: 'purchase_show-link' do %>
             <div class="card">
               <div class="card-body">
                 <%= image_tag purchase_item.item_image.variant(:thumb) %>
