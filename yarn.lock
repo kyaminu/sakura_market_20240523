@@ -697,6 +697,11 @@ slash@^5.0.0, slash@^5.1.0:
   resolved "https://registry.yarnpkg.com/source-map-js/-/source-map-js-1.2.0.tgz#16b809c162517b5b8c3e7dcd315a2a5c2612b2af"
   integrity sha512-itJW8lvSA0TXEphiRoawsCksnlf8SyvmFzIhltqAHluXd88pkCd+cXJVHTDwdCr0IzwptSm035IHQktUu1QUMg==
 
+stimulus-datepicker@^1.0.9:
+  version "1.0.9"
+  resolved "https://registry.yarnpkg.com/stimulus-datepicker/-/stimulus-datepicker-1.0.9.tgz#57d3ee5c69ab060acd510fad0187b1236f6929fc"
+  integrity sha512-InihgKw4VXXy2cB3u7JzjR6cps4Y1CEyZviCn3hp2Ani1EKDoLy7z3lHTLRsM23bcdvQiJI18iBjR18zFIIETw==
+
 string-width@^4.1.0, string-width@^4.2.0, string-width@^4.2.3:
   version "4.2.3"
   resolved "https://registry.yarnpkg.com/string-width/-/string-width-4.2.3.tgz#269c7117d27b05ad2e536830a8ec895ef9c6d010"

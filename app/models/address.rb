@@ -13,4 +13,12 @@ class Address < ApplicationRecord
   validates :street, presence: true
 
   scope :default_order, -> { order(created_at: :desc) }
+
+  def full_address
+    "#{prefecture.name}#{city}#{street}"
+  end
+
+  def address_options
+    "#{name_kanji} 〒#{postal_code} #{full_address}"
+  end
 end

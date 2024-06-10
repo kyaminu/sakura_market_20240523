@@ -48,7 +48,7 @@
               <div class="ms-auto"><%= number_to_currency(current_cart.subtotal) %></div>
             </div>
             <div class="d-flex justify-content-md-around">
-              <%= link_to 'レジに進む', '#', class: 'btn btn-primary me-2' %>
+              <%= link_to 'レジに進む', new_users_purchase_path, class: 'btn btn-primary me-2' %>
               <%= link_to 'お買い物を続ける', root_path, class: 'btn btn-outline-dark' %>
             </div>
           </div>
