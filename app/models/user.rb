@@ -20,7 +20,7 @@ class User < ApplicationRecord
     result
   end
 
-  def merge_cart(session_cart)
+  def merge_cart!(session_cart)
     ActiveRecord::Base.transaction do
       session_cart.cart_items.each do |session_item|
         merge_cart_item(session_item)
