@@ -1,5 +1,6 @@
 describe '購入ページ', type: :system do
   let(:user) { create(:user, :with_cart) }
+
   before do
     sign_in user
   end
