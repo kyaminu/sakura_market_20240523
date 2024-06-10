@@ -14,7 +14,7 @@ class Purchase < ApplicationRecord
       time20_21
     ]
   attribute :delivery_time, :string, default: :time8_12
-  attr_accessor :address_id # NOTE: 届け先住所検索するために、住所idを一時的に取得する用
+  attr_accessor :address_id # NOTE: 届け先住所をプルダウン選択できるようにするため
 
   validates :delivery_fee, presence: true, numericality: { greater_than_or_equal_to: 600 }
   validates :handling_fee, presence: true, numericality: { greater_than_or_equal_to: 300, less_than_or_equal_to: 900 }
