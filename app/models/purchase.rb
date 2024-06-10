@@ -15,6 +15,7 @@ class Purchase < ApplicationRecord
     ]
   attribute :delivery_time, :string, default: :time8_12
   attr_accessor :address_id # NOTE: 届け先住所検索するために、住所idを一時的に取得する用
+  attr_accessor :cart
 
   validates :delivery_fee, presence: true, numericality: { greater_than_or_equal_to: 600 }
   validates :handling_fee, presence: true, numericality: { greater_than_or_equal_to: 300, less_than_or_equal_to: 900 }
@@ -24,12 +25,14 @@ class Purchase < ApplicationRecord
 
   scope :default_order, -> { order(created_at: :desc) }
 
-  def delivery_fee_value(item_count)
+  def delivery_fee_value
+    item_count = cart.present? ? cart.cart_items.count : purchase_items.count
+
     delivery_fee = 600
     if item_count > 5
       delivery_fee += (item_count / 5) * 600
     end
-
+    item_count
     (delivery_fee * (1 + tax_rate)).floor
   end
 
@@ -37,7 +40,9 @@ class Purchase < ApplicationRecord
     purchase_items.sum { |purchase_item| (purchase_item.item_price_excluding_tax * (1 + purchase_item.item_tax_rate)).floor * purchase_item.quantity }
   end
 
-  def handling_fee_value(subtotal)
+  def handling_fee_value
+    subtotal = @cart.present? ? @cart.subtotal : purchase_item_subtotal
+
     case subtotal
     when 1..9999
       handling_fee = 300
@@ -51,8 +56,9 @@ class Purchase < ApplicationRecord
     (handling_fee * (1 + tax_rate)).floor
   end
 
-  def total_value(subtotal, delivery_fee, handling_fee)
-    [subtotal, delivery_fee, handling_fee].sum
+  def total_value
+    subtotal = @cart.present? ? @cart.subtotal : purchase_item_subtotal
+    [subtotal, delivery_fee_value, handling_fee_value].sum
   end
 
   def purchase_items_from_cart(current_cart)

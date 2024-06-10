@@ -47,22 +47,16 @@
           </div>
           <div class="fw-bold fs-3 d-flex mb-3">
             <div class="text-start">配送料</div>
-            <div class="ms-auto"><%= number_to_currency @purchase.delivery_fee_value(@purchase.purchase_items.count) %></div>
+            <div class="ms-auto"><%= number_to_currency @purchase.delivery_fee_value %></div>
           </div>
           <div class="fw-bold fs-3 d-flex mb-3">
             <div class="text-start">手数料</div>
-            <div class="ms-auto"><%= number_to_currency @purchase.handling_fee_value(@purchase.purchase_item_subtotal) %></div>
+            <div class="ms-auto"><%= number_to_currency @purchase.handling_fee_value %></div>
           </div>
           <div class="fw-bold fs-3 d-flex mb-3">
             <div class="text-start">合計(税込)</div>
             <div class="ms-auto">
-              <%= number_to_currency(
-                @purchase.total_value(
-                  @purchase.purchase_item_subtotal,
-                  @purchase.delivery_fee_value(@purchase.purchase_items.count),
-                  @purchase.handling_fee_value(@purchase.purchase_item_subtotal)
-                )
-              ) %>
+              <%= number_to_currency(@purchase.total_value) %>
             </div>
           </div>
           <div class="text-end">
@@ -71,6 +65,5 @@
         </div>
       </div>
     </div>
-
   </div>
 </div>

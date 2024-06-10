@@ -5,6 +5,7 @@ class Users::PurchasesController < Users::ApplicationController
 
   def new
     @purchase = current_user.purchases.new
+    @purchase.cart = current_cart
   end
 
   def show

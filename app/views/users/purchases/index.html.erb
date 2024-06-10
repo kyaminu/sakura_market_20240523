@@ -11,13 +11,7 @@
                 <div class="fs-4"><%= l purchase.created_at %>購入分</div>
                 <div class="mt-2">
                   合計金額:
-                  <%= number_to_currency(
-                    purchase.total_value(
-                      purchase.purchase_item_subtotal,
-                      purchase.delivery_fee_value(purchase.purchase_items.count),
-                      purchase.handling_fee_value(purchase.purchase_item_subtotal)
-                    )
-                  ) %>
+                  <%= number_to_currency(purchase.total_value) %>
                 </div>
                 <div>
                   配送日時:
