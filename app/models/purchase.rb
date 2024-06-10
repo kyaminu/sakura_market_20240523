@@ -32,7 +32,6 @@ class Purchase < ApplicationRecord
     if item_count > 5
       delivery_fee += (item_count / 5) * 600
     end
-    item_count
     (delivery_fee * (1 + tax_rate)).floor
   end
 
