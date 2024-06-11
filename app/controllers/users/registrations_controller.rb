@@ -3,6 +3,7 @@
 class Users::RegistrationsController < Devise::RegistrationsController
   def create
     super
+
     if session[:cart_id].present?
       cart = Cart.find(session[:cart_id])
       cart.update!(user_id: current_user.id)
@@ -14,6 +15,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   end
 
   protected
+
     def update_resource(resource, params)
       resource.update_without_password(params)
     end
