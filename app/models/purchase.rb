@@ -17,8 +17,8 @@ class Purchase < ApplicationRecord
   attr_accessor :address_id # NOTE: 届け先住所をプルダウン選択できるようにするため
   attr_accessor :cart # NOTE: 手数料や配送料の計算を、#newと#indexや#showと切り分けて使用するため
 
-  validates :delivery_fee, presence: true, numericality: { greater_than_or_equal_to: 600 }
-  validates :handling_fee, presence: true, numericality: { greater_than_or_equal_to: 300, less_than_or_equal_to: 900 }
+  validates :delivery_fee, presence: true, numericality: { greater_than_or_equal_to: 660 }
+  validates :handling_fee, presence: true, numericality: { greater_than_or_equal_to: 330, less_than_or_equal_to: 1100 }
   validates :delivery_on, presence: true
   validates :delivery_time, presence: true
   validates :address_id, presence: true
