@@ -1,5 +1,5 @@
 class Administrators::AdministratorsController < Administrators::ApplicationController
-before_action :set_administrator, only: %i[edit update destroy]
+  before_action :set_administrator, only: %i[edit update destroy]
 
   def index
     @administrators = Administrator.default_order
