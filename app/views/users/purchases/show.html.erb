@@ -8,7 +8,9 @@
       <div class="mb-3">
         <div class="fs-4">送付先住所</div>
         <%= @purchase.name %>
-        <%= @purchase.address %>
+        <%= @purchase.prefecture %>
+        <%= @purchase.city %>
+        <%= @purchase.street %>
       </div>
 
       <% @purchase.purchase_items.each do |purchase_item| %>

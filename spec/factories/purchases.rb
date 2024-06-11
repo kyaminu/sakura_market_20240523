@@ -5,19 +5,13 @@ FactoryBot.define do
     name { 'お届け先さん' }
     phone_number { '09012345678' }
     postal_code { '1234567' }
-    address { '住所' }
+    prefecture { '兵庫県' }
+    city { '神戸市' }
+    street { '三宮' }
 
     trait :with_user do
       transient do
         user
-      end
-    end
-
-    trait :with_address do
-      after(:build) do |purchase, evaluator|
-        address = evaluator.address || create(:address, user: purchase.user)
-        purchase.address_id = address.id
-        purchase.address = address.full_address
       end
     end
   end

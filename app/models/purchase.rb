@@ -96,7 +96,9 @@ class Purchase < ApplicationRecord
         self.name = selected_address.name_kanji
         self.phone_number = selected_address.phone_number
         self.postal_code = selected_address.postal_code
-        self.address = selected_address.full_address
+        self.prefecture = selected_address.prefecture.name
+        self.city = selected_address.city
+        self.street = selected_address.street
       end
     end
 
