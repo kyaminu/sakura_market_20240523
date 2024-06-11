@@ -7,8 +7,19 @@
     <div class="d-flex flex-column col-md-6">
       <div class="mb-3">
         <div class="fs-4">送付先住所</div>
-        <%= @purchase.name %>
-        <%= @purchase.address %>
+        <div class="d-flex justify-content-between">
+          <div class="col-md-6">
+            <%= @purchase.name %>
+            <div>
+              〒 <%= @purchase.postal_code %>
+              <%= @purchase.address %>
+            </div>
+          </div>
+          <div class="col-md-6 text-end">
+            <div class="mt-1">配達希望日: <%= l @purchase.delivery_on %></div>
+            <div>お届け予定時間: <%= @purchase.delivery_time.text %></div>
+          </div>
+        </div>
       </div>
 
       <% @purchase.purchase_items.each do |purchase_item| %>
