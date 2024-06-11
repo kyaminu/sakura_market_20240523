@@ -6,9 +6,7 @@ describe Purchase do
       address = create(:address, user:)
       item = create(:item)
       create(:cart_item, cart:, item:)
-      # NOTE: address_idを指定してるのはバリデーションをスキップさせるため。full_addressを直で入れてるのは、purchase#createが通っていないため
-      purchase = build(:purchase, user:, delivery_on: 3.business_days.after(Date.today).to_date, address_id: address.id)
-      purchase.address = address.full_address
+      purchase = build(:purchase, :with_address, user:, address:, delivery_on: 3.business_days.after(Date.today).to_date)
       create(:purchase_item, purchase:, item_id: item.id, item_name: item.name, item_description: item.description, item_price_excluding_tax: item.price_excluding_tax)
 
       expect(purchase.delivery_fee_value).to eq 660
@@ -37,9 +35,7 @@ describe Purchase do
         address = create(:address, user:)
         item = create(:item, price_excluding_tax: 5000)
         create(:cart_item, cart:, item:)
-        # NOTE: address_idを指定してるのはバリデーションをスキップさせるため。full_addressを直で入れてるのは、purchase#createが通っていないため
-        purchase = build(:purchase, user:, delivery_on: 3.business_days.after(Date.today).to_date, address_id: address.id)
-        purchase.address = address.full_address
+        purchase = build(:purchase, :with_address, user:, address:, delivery_on: 3.business_days.after(Date.today).to_date)
         create(:purchase_item, purchase:, item_id: item.id, item_name: item.name, item_description: item.description, item_price_excluding_tax: item.price_excluding_tax)
 
         expect(purchase.handling_fee_value).to eq 330
@@ -51,9 +47,7 @@ describe Purchase do
         address = create(:address, user:)
         item = create(:item, price_excluding_tax: 15000)
         create(:cart_item, cart:, item:)
-        # NOTE: address_idを指定してるのはバリデーションをスキップさせるため。full_addressを直で入れてるのは、purchase#createが通っていないため
-        purchase = build(:purchase, user:, delivery_on: 3.business_days.after(Date.today).to_date, address_id: address.id)
-        purchase.address = address.full_address
+        purchase = build(:purchase, :with_address, user:, address:, delivery_on: 3.business_days.after(Date.today).to_date)
         create(:purchase_item, purchase:, item_id: item.id, item_name: item.name, item_description: item.description, item_price_excluding_tax: item.price_excluding_tax)
 
         expect(purchase.handling_fee_value).to eq 440
@@ -65,9 +59,7 @@ describe Purchase do
         address = create(:address, user:)
         item = create(:item, price_excluding_tax: 35000)
         create(:cart_item, cart:, item:)
-        # NOTE: address_idを指定してるのはバリデーションをスキップさせるため。full_addressを直で入れてるのは、purchase#createが通っていないため
-        purchase = build(:purchase, user:, delivery_on: 3.business_days.after(Date.today).to_date, address_id: address.id)
-        purchase.address = address.full_address
+        purchase = build(:purchase, :with_address, user:, address:, delivery_on: 3.business_days.after(Date.today).to_date)
         create(:purchase_item, purchase:, item_id: item.id, item_name: item.name, item_description: item.description, item_price_excluding_tax: item.price_excluding_tax)
 
         expect(purchase.handling_fee_value).to eq 660
@@ -79,9 +71,7 @@ describe Purchase do
         address = create(:address, user:)
         item = create(:item, price_excluding_tax: 120000)
         create(:cart_item, cart:, item:)
-        # NOTE: address_idを指定してるのはバリデーションをスキップさせるため。full_addressを直で入れてるのは、purchase#createが通っていないため
-        purchase = build(:purchase, user:, delivery_on: 3.business_days.after(Date.today).to_date, address_id: address.id)
-        purchase.address = address.full_address
+        purchase = build(:purchase, :with_address, user:, address:, delivery_on: 3.business_days.after(Date.today).to_date)
         create(:purchase_item, purchase:, item_id: item.id, item_name: item.name, item_description: item.description, item_price_excluding_tax: item.price_excluding_tax)
 
         expect(purchase.handling_fee_value).to eq 1100
@@ -98,9 +88,7 @@ describe Purchase do
       another_item = create(:item, price_excluding_tax: 200)
       cart_item = create(:cart_item, cart:, item:, quantity: 2)
       another_cart_item = create(:cart_item, cart:, item: another_item, quantity: 1)
-      # NOTE: address_idを指定してるのはバリデーションをスキップさせるため。full_addressを直で入れてるのは、purchase#createが通っていないため
-      purchase = build(:purchase, user:, delivery_on: 3.business_days.after(Date.today).to_date, address_id: address.id)
-      purchase.address = address.full_address
+      purchase = build(:purchase, :with_address, user:, address:, delivery_on: 3.business_days.after(Date.today).to_date)
       create(:purchase_item, purchase:, item_id: item.id, item_name: item.name, item_description: item.description, item_price_excluding_tax: item.price_excluding_tax, quantity: cart_item.quantity)
       create(:purchase_item, purchase:, item_id: another_item.id, item_name: another_item.name, item_description: another_item.description, item_price_excluding_tax: another_item.price_excluding_tax, quantity: another_cart_item.quantity)
 

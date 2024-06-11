@@ -12,5 +12,13 @@ FactoryBot.define do
         user
       end
     end
+
+    trait :with_address do
+      after(:build) do |purchase, evaluator|
+        address = evaluator.address || create(:address, user: purchase.user)
+        purchase.address_id = address.id
+        purchase.address = address.full_address
+      end
+    end
   end
 end
