@@ -15,7 +15,7 @@ class Users::AddressesController < Users::ApplicationController
   def create
     @address = current_user.addresses.new(address_params)
     if @address.save
-      redirect_to users_addresses_path, notice: '登録しました'
+      redirect_to users_addresses_path, notice: t('controller.created')
     else
       render :new, status: :unprocessable_entity
     end
@@ -23,7 +23,7 @@ class Users::AddressesController < Users::ApplicationController
 
   def update
     if @address.update(address_params)
-      redirect_to users_addresses_path, notice: '更新しました'
+      redirect_to users_addresses_path, notice: t('controller.updated')
     else
       render :edit, status: :unprocessable_entity
     end
@@ -31,7 +31,7 @@ class Users::AddressesController < Users::ApplicationController
 
   def destroy
     @address.destroy!
-    redirect_to users_addresses_path, notice: '削除しました', status: :see_other
+    redirect_to users_addresses_path, notice: t('controller.destroyed'), status: :see_other
   end
 
   private

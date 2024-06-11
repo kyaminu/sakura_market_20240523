@@ -15,7 +15,7 @@ class Administrators::ItemsController < Administrators::ApplicationController
   def create
     @item = Item.new(item_params)
     if @item.save
-      redirect_to administrators_root_path, notice: '登録しました'
+      redirect_to administrators_root_path, notice: t('controller.created')
     else
       render :new, status: :unprocessable_entity
     end
@@ -23,7 +23,7 @@ class Administrators::ItemsController < Administrators::ApplicationController
 
   def update
     if @item.update(item_params)
-      redirect_to administrators_root_path, notice: '更新しました'
+      redirect_to administrators_root_path, notice: t('controller.updated')
     else
       render :edit, status: :unprocessable_entity
     end
@@ -31,17 +31,17 @@ class Administrators::ItemsController < Administrators::ApplicationController
 
   def destroy
     @item.destroy!
-    redirect_to administrators_items_path, notice: '削除しました', status: :see_other
+    redirect_to administrators_items_path, notice: t('controller.destroyed'), status: :see_other
   end
 
   def move_higher
     @item.move_higher
-    redirect_to administrators_items_path, notice: '順番を変更しました'
+    redirect_to administrators_items_path, notice: t('controller.moved')
   end
 
   def move_lower
     @item.move_lower
-    redirect_to administrators_items_path, notice: '順番を変更しました'
+    redirect_to administrators_items_path, notice: t('controller.moved')
   end
 
   private
