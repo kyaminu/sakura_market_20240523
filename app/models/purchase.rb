@@ -90,9 +90,6 @@ class Purchase < ApplicationRecord
     end
 
     def set_address
-      # if address_id.blank?
-      #   errors.add(:address_id, :hogehoge)
-      # end
       selected_address = user.addresses.find_by(id: address_id)
 
       if selected_address
