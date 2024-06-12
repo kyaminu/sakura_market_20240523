@@ -33,6 +33,26 @@ describe '購入ページ', type: :system do
     expect(page).not_to have_content '数量変更'
   end
 
+  it '配送日と住所が選択されていないと、エラーメッセージが出ること' do
+    item = create(:item, :published, name: 'トマト', price_excluding_tax: 100, tax_rate: 0.08)
+    create(:cart_item, cart: user.cart, item:)
+    create(:address, user:, name_kanji: 'テスト太郎')
+
+    visit new_users_purchase_path
+    expect(page).to have_content 'トマト'
+
+    click_on '購入する'
+    expect(page).to have_content '希望配送日を入力してください'
+    expect(page).to have_content 'お届け先を入力してください'
+
+    find(:test_class, 'select-date-button').click
+    find('button[tabindex="0"]').click
+    select 'テスト太郎', from: "purchase[address_id]"
+
+    click_on '購入する'
+    expect(page).to have_content '商品を購入しました'
+  end
+
   it '購入履歴が残ること' do
     tomato = create(:item, :published, name: 'トマト', price_excluding_tax: 100, tax_rate: 0.08)
     kyabetu = create(:item, :published, name: 'キャベツ', price_excluding_tax: 200, tax_rate: 0.08)
