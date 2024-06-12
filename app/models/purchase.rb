@@ -15,7 +15,7 @@ class Purchase < ApplicationRecord
     ]
   attribute :delivery_time, :string, default: :time8_12
   attr_accessor :address_id # NOTE: 届け先住所をプルダウン選択できるようにするため
-  attr_accessor :cart # NOTE: 手数料や配送料の計算を、#newと#indexや#showと切り分けて使用するため
+  attr_writer :cart # NOTE: 手数料や配送料の計算を、#newと#indexや#showと切り分けて使用するため
 
   validates :delivery_fee, presence: true, numericality: { greater_than_or_equal_to: 600 }
   validates :handling_fee, presence: true, numericality: { greater_than_or_equal_to: 300, less_than_or_equal_to: 1000 }
@@ -26,7 +26,7 @@ class Purchase < ApplicationRecord
   scope :default_order, -> { order(created_at: :desc) }
 
   def delivery_fee_value
-    item_count = cart.present? ? cart.cart_items.count : purchase_items.count
+    item_count = @cart.present? ? @cart.cart_items.count : purchase_items.count
 
     delivery_fee = 600
     if item_count > 5
