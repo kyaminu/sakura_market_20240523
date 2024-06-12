@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :item do
-    name { "商品名" }
+    sequence(:name) { |index| "name_#{index}" }
     description { "商品説明" }
     price_excluding_tax { 100 }
     published { false }

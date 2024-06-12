@@ -9,7 +9,9 @@ class CreatePurchases < ActiveRecord::Migration[7.1]
       t.string :name, null: false
       t.string :phone_number, null: false
       t.string :postal_code, null: false
-      t.string :address, null: false
+      t.string :prefecture, null: false
+      t.string :city, null: false
+      t.string :street, null: false
       t.references :user, null: true, foreign_key: true
 
       t.timestamps

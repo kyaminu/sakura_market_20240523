@@ -1,5 +1,3 @@
-require 'rails_helper'
-
 describe '商品ページ', type: :system do
   describe '一覧ページ' do
     it '商品が表示されること' do

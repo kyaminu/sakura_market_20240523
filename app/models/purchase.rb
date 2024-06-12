@@ -15,26 +15,34 @@ class Purchase < ApplicationRecord
     ]
   attribute :delivery_time, :string, default: :time8_12
   attr_accessor :address_id # NOTE: 届け先住所をプルダウン選択できるようにするため
+  attr_accessor :cart # NOTE: 手数料や配送料の計算を、#newと#indexや#showと切り分けて使用するため
 
   validates :delivery_fee, presence: true, numericality: { greater_than_or_equal_to: 600 }
   validates :handling_fee, presence: true, numericality: { greater_than_or_equal_to: 300, less_than_or_equal_to: 900 }
   validates :delivery_on, presence: true
   validates :delivery_time, presence: true
-  validates :address_id, presence: true
+  validates :address_id, presence: true, on: :purchase_items_from_cart
 
   scope :default_order, -> { order(created_at: :desc) }
 
   def delivery_fee_value
-    delivery_fee = 600
-    if user.cart.cart_items.count > 5
-      delivery_fee += (user.cart.cart_items.count / 5) * 600
-    end
+    item_count = cart.present? ? cart.cart_items.count : purchase_items.count
 
+    delivery_fee = 600
+    if item_count > 5
+      delivery_fee += (item_count / 5) * 600
+    end
     (delivery_fee * (1 + tax_rate)).floor
   end
 
+  def purchase_item_subtotal
+    purchase_items.sum { |purchase_item| (purchase_item.item_price_excluding_tax * (1 + purchase_item.item_tax_rate)).floor * purchase_item.quantity }
+  end
+
   def handling_fee_value
-    case user.cart.subtotal
+    subtotal = @cart.present? ? @cart.subtotal : purchase_item_subtotal
+
+    case subtotal
     when 1..9999
       handling_fee = 300
     when 10000..29999
@@ -48,7 +56,8 @@ class Purchase < ApplicationRecord
   end
 
   def total_value
-    [user.cart.subtotal, delivery_fee_value, handling_fee_value].sum
+    subtotal = @cart.present? ? @cart.subtotal : purchase_item_subtotal
+    [subtotal, delivery_fee_value, handling_fee_value].sum
   end
 
   def purchase_items_from_cart(current_cart)
@@ -58,7 +67,7 @@ class Purchase < ApplicationRecord
 
     ActiveRecord::Base.transaction do
       current_cart.cart_items.each { |cart_item| cart_item.destroy! }
-      save!
+      save!(context: :purchase_items_from_cart)
     end
     true
   rescue ActiveRecord::RecordInvalid, ActiveRecord::RecordNotDestroyed => e
@@ -81,13 +90,15 @@ class Purchase < ApplicationRecord
     end
 
     def set_address
-      selected_address = user.addresses.find(address_id)
+      selected_address = user.addresses.find_by(id: address_id)
 
       if selected_address
         self.name = selected_address.name_kanji
         self.phone_number = selected_address.phone_number
         self.postal_code = selected_address.postal_code
-        self.address = selected_address.full_address
+        self.prefecture = selected_address.prefecture.name
+        self.city = selected_address.city
+        self.street = selected_address.street
       end
     end
 

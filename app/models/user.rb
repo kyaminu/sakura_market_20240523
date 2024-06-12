@@ -7,8 +7,6 @@ class User < ApplicationRecord
 
   validates :email, presence: true
 
-  after_create :create_cart!
-
   scope :default_order, -> { order(:id) }
 
   def update_without_password(params, *options)

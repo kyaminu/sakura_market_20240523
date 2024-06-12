@@ -1,5 +1,3 @@
-require 'rails_helper'
-
 describe '商品管理', type: :system do
   before do
     admin = create(:administrator)

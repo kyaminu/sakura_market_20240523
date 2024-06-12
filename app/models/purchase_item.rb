@@ -13,4 +13,8 @@ class PurchaseItem < ApplicationRecord
   validates :quantity, presence: true
 
   scope :default_order, -> { order(:item_id) }
+
+  def price_included_tax
+    (item_price_excluding_tax * (1 + item_tax_rate)).floor
+  end
 end

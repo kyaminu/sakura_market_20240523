@@ -1,5 +1,3 @@
-require 'rails_helper'
-
 describe '管理ユーザ', type: :system do
   before do
     admin = create(:administrator)

@@ -1,5 +1,3 @@
-require 'rails_helper'
-
 describe 'カート機能', type: :system do
   describe 'ログイン済ユーザのカート機能' do
     before do

@@ -23,6 +23,10 @@ gem 'simple_form'
 gem "stimulus-rails"
 gem "turbo-rails"
 
+group :development do
+  gem 'web-console'
+end
+
 group :development, :test do
   gem 'debug'
   gem 'capybara'
@@ -33,5 +37,4 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'rubocop', require: false
   gem 'rubocop-rails', require: false
-  gem 'web-console'
 end

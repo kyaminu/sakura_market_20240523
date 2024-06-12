@@ -1,5 +1,3 @@
-require 'rails_helper'
-
 describe '住所リスト', type: :system do
   let(:user) { create(:user) }
 

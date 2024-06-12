@@ -46,7 +46,9 @@
             </div>
             <div class="fw-bold fs-3 d-flex mb-3">
               <div class="text-start">合計(税込)</div>
-              <div class="ms-auto"><%= number_to_currency(@purchase.total_value) %></div>
+              <div class="ms-auto">
+                <%= number_to_currency(@purchase.total_value) %>
+              </div>
             </div>
 
             <%= simple_form_for(@purchase, url: users_purchases_path) do |f| %>
@@ -64,7 +66,7 @@
                     <%= f.input :delivery_on, as: :string, readonly: true, label: false, input_html: { data: { datepicker_target: 'input' } } %>
                   </div>
                   <div class="select-date-button">
-                    <div class="btn btn-primary" data-datepicker-target="toggle">選択</div>
+                    <div class="btn btn-primary" data-datepicker-target="toggle" data-test-class="select-date-button">選択</div>
                   </div>
                 </div>
               </div>
