@@ -11,7 +11,7 @@ describe '管理ユーザ', type: :system do
     fill_in 'administrator[password]', with: 'password'
     click_on '登録する'
 
-    expect(page).to have_content '作成しました'
+    expect(page).to have_content '登録しました'
     expect(page).to have_content '管理ユーザ一覧'
     expect(page).to have_content 'admin@example.com'
   end
