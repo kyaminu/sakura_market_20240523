@@ -9,6 +9,14 @@ ja:
         format: "%u%n"
         delimiter: ","
         precision: 0
+  controller:
+    created: '登録しました'
+    updated: '更新しました'
+    destroyed: '削除しました'
+    moved: '順番を変更しました'
+    added: 'カートに追加しました'
+    changed: '数量を変更しました'
+    purchased: '商品を購入しました'
   enumerize:
     purchase:
       delivery_time:

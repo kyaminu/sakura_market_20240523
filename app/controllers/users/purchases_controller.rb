@@ -15,7 +15,7 @@ class Users::PurchasesController < Users::ApplicationController
   def create
     @purchase = current_user.purchases.build(purchase_params)
     if @purchase.purchase_items_from_cart(current_cart)
-      redirect_to users_purchases_path, notice: '商品を購入しました。'
+      redirect_to users_purchases_path, notice: t('controller.purchased')
     else
       render :new, status: :unprocessable_entity
     end

@@ -1,5 +1,5 @@
 class Administrators::AdministratorsController < Administrators::ApplicationController
-before_action :set_administrator, only: %i[edit update destroy]
+  before_action :set_administrator, only: %i[edit update destroy]
 
   def index
     @administrators = Administrator.default_order
@@ -15,7 +15,7 @@ before_action :set_administrator, only: %i[edit update destroy]
   def create
     @administrator = Administrator.new(administrator_params)
     if @administrator.save
-      redirect_to administrators_administrators_path, notice: '作成しました'
+      redirect_to administrators_administrators_path, notice: t('controller.created')
     else
       render :new, status: :unprocessable_entity
     end
@@ -23,7 +23,7 @@ before_action :set_administrator, only: %i[edit update destroy]
 
   def update
     if @administrator.update(administrator_params)
-      redirect_to administrators_administrators_path, notice: '更新しました'
+      redirect_to administrators_administrators_path, notice: t('controller.updated')
     else
       render :edit, status: :unprocessable_entity
     end
@@ -31,7 +31,7 @@ before_action :set_administrator, only: %i[edit update destroy]
 
   def destroy
     @administrator.destroy!
-    redirect_to administrators_administrators_path, notice: '削除しました', status: :see_other
+    redirect_to administrators_administrators_path, notice: t('controller.destroyed'), status: :see_other
   end
 
   private

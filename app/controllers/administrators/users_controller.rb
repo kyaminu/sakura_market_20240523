@@ -10,7 +10,7 @@ class Administrators::UsersController < Administrators::ApplicationController
 
   def update
     if @user.update(user_params)
-      redirect_to administrators_users_path, notice: '更新しました'
+      redirect_to administrators_users_path, notice: t('controller.updated')
     else
       render :edit, status: :unprocessable_entity
     end

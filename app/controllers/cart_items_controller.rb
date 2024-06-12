@@ -4,17 +4,17 @@ class CartItemsController < ApplicationController
   def create
     @item = Item.find(params[:item_id])
     current_cart.cart_items.create!(item: @item)
-    redirect_to cart_path, notice: 'カートに追加しました'
+    redirect_to cart_path, notice: t('controller.added')
   end
 
   def update
     @cart_item.update!(cart_item_params)
-    redirect_to cart_path, notice: '数量を変更しました'
+    redirect_to cart_path, notice: t('controller.changed')
   end
 
   def destroy
     @cart_item.destroy!
-    redirect_to cart_path, notice: 'カートから削除しました', status: :see_other
+    redirect_to cart_path, notice: t('controller.destroyed'), status: :see_other
   end
 
   private
