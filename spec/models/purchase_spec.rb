@@ -5,7 +5,7 @@ describe Purchase do
       cart = create(:cart, user:)
       item = create(:item)
       create(:cart_item, cart:, item:)
-      purchase = create(:purchase, :skip_validate, user:, delivery_on: 3.business_days.after(Date.today).to_date)
+      purchase = create(:purchase, user:, delivery_on: 3.business_days.after(Date.today).to_date)
       create(:purchase_item, purchase:, item_id: item.id, item_name: item.name, item_description: item.description, item_price_excluding_tax: item.price_excluding_tax)
 
       expect(purchase.delivery_fee_value).to eq 660
@@ -33,7 +33,7 @@ describe Purchase do
         cart = create(:cart, user:)
         item = create(:item, price_excluding_tax: 5000)
         create(:cart_item, cart:, item:)
-        purchase = create(:purchase, :skip_validate, user:, delivery_on: 3.business_days.after(Date.today).to_date)
+        purchase = create(:purchase, user:, delivery_on: 3.business_days.after(Date.today).to_date)
         create(:purchase_item, purchase:, item_id: item.id, item_name: item.name, item_description: item.description, item_price_excluding_tax: item.price_excluding_tax)
 
         expect(purchase.handling_fee_value).to eq 330
@@ -44,7 +44,7 @@ describe Purchase do
         cart = create(:cart, user:)
         item = create(:item, price_excluding_tax: 15000)
         create(:cart_item, cart:, item:)
-        purchase = create(:purchase, :skip_validate, user:, delivery_on: 3.business_days.after(Date.today).to_date)
+        purchase = create(:purchase, user:, delivery_on: 3.business_days.after(Date.today).to_date)
         create(:purchase_item, purchase:, item_id: item.id, item_name: item.name, item_description: item.description, item_price_excluding_tax: item.price_excluding_tax)
 
         expect(purchase.handling_fee_value).to eq 440
@@ -55,7 +55,7 @@ describe Purchase do
         cart = create(:cart, user:)
         item = create(:item, price_excluding_tax: 35000)
         create(:cart_item, cart:, item:)
-        purchase = create(:purchase, :skip_validate, user:, delivery_on: 3.business_days.after(Date.today).to_date)
+        purchase = create(:purchase, user:, delivery_on: 3.business_days.after(Date.today).to_date)
         create(:purchase_item, purchase:, item_id: item.id, item_name: item.name, item_description: item.description, item_price_excluding_tax: item.price_excluding_tax)
 
         expect(purchase.handling_fee_value).to eq 660
@@ -66,7 +66,7 @@ describe Purchase do
         cart = create(:cart, user:)
         item = create(:item, price_excluding_tax: 120000)
         create(:cart_item, cart:, item:)
-        purchase = create(:purchase, :skip_validate, user:, delivery_on: 3.business_days.after(Date.today).to_date)
+        purchase = create(:purchase, user:, delivery_on: 3.business_days.after(Date.today).to_date)
         create(:purchase_item, purchase:, item_id: item.id, item_name: item.name, item_description: item.description, item_price_excluding_tax: item.price_excluding_tax)
 
         expect(purchase.handling_fee_value).to eq 1100
@@ -82,7 +82,7 @@ describe Purchase do
       another_item = create(:item, price_excluding_tax: 200)
       cart_item = create(:cart_item, cart:, item:, quantity: 2)
       another_cart_item = create(:cart_item, cart:, item: another_item, quantity: 1)
-      purchase = create(:purchase, :skip_validate, user:, delivery_on: 3.business_days.after(Date.today).to_date)
+      purchase = create(:purchase, user:, delivery_on: 3.business_days.after(Date.today).to_date)
       create(:purchase_item, purchase:, item_id: item.id, item_name: item.name, item_description: item.description, item_price_excluding_tax: item.price_excluding_tax, quantity: cart_item.quantity)
       create(:purchase_item, purchase:, item_id: another_item.id, item_name: another_item.name, item_description: another_item.description, item_price_excluding_tax: another_item.price_excluding_tax, quantity: another_cart_item.quantity)
 

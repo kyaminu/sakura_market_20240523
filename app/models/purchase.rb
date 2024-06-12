@@ -21,7 +21,7 @@ class Purchase < ApplicationRecord
   validates :handling_fee, presence: true, numericality: { greater_than_or_equal_to: 300, less_than_or_equal_to: 900 }
   validates :delivery_on, presence: true
   validates :delivery_time, presence: true
-  validates :address_id, presence: true
+  validates :address_id, presence: true, on: :purchase_items_from_cart
 
   scope :default_order, -> { order(created_at: :desc) }
 
@@ -67,7 +67,7 @@ class Purchase < ApplicationRecord
 
     ActiveRecord::Base.transaction do
       current_cart.cart_items.each { |cart_item| cart_item.destroy! }
-      save!
+      save!(context: :purchase_items_from_cart)
     end
     true
   rescue ActiveRecord::RecordInvalid, ActiveRecord::RecordNotDestroyed => e
@@ -90,7 +90,10 @@ class Purchase < ApplicationRecord
     end
 
     def set_address
-      selected_address = user.addresses.find(address_id)
+      # if address_id.blank?
+      #   errors.add(:address_id, :hogehoge)
+      # end
+      selected_address = user.addresses.find_by(id: address_id)
 
       if selected_address
         self.name = selected_address.name_kanji
