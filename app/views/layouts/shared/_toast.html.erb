@@ -1,0 +1,10 @@
+<% flash.each do |key, message| %>
+  <div class="toast position-fixed align-items-center border-0 end-0 <%= key == 'notice' ? 'text-bg-primary' : 'text-bg-danger' %>" data-controller="toast">
+    <div class="d-flex">
+      <div class="toast-body">
+        <%= message %>
+      </div>
+      <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+    </div>
+  </div>
+<% end %>

@@ -3,6 +3,8 @@
 // ./bin/rails generate stimulus controllerName
 
 import { application } from "./application"
+import ToastController from "./toast_controller";
+import { Datepicker } from 'stimulus-datepicker'
 
-import HelloController from "./hello_controller"
-application.register("hello", HelloController)
+application.register('toast', ToastController)
+application.register('datepicker', Datepicker)

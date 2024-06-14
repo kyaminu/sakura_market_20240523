@@ -1,0 +1,62 @@
+ja:
+  time:
+    formats:
+      default: "%Y年%m月%d日"
+  number:
+    currency:
+      format:
+        unit: "¥"
+        format: "%u%n"
+        delimiter: ","
+        precision: 0
+  controller:
+    created: '登録しました'
+    updated: '更新しました'
+    destroyed: '削除しました'
+    moved: '順番を変更しました'
+    added: 'カートに追加しました'
+    changed: '数量を変更しました'
+    purchased: '商品を購入しました'
+  enumerize:
+    purchase:
+      delivery_time:
+        time8_12: 8時〜12時
+        time12_14: 12時〜14時
+        time14_16: 14時〜16時
+        time16_18: 16時〜18時
+        time18_20: 18時〜20時
+        time20_21: 20時〜21時
+  activerecord:
+    attributes:
+      administrator:
+        email: メールアドレス
+        password: パスワード
+        remember_me: ログイン情報を保存する
+      item:
+        name: 商品名
+        description: 商品説明
+        image: 画像
+        price_excluding_tax: 価格(税抜)
+        published: 公開
+      user:
+        name: 名前
+        email: メールアドレス
+        password: パスワード
+        password_confirmation: パスワード確認
+      address:
+        name_kanji: 名前
+        name_kana: なまえ
+        phone_number: 電話番号
+        postal_code: 郵便番号
+        prefecture_code: 都道府県
+        city: 市区町村
+        street: 以降の住所
+      purchase:
+        delivery_fee: 送料
+        handling_fee: 手数料
+        delivery_on: 希望配送日
+        delivery_time: 希望時間
+        name: お届け先
+        phone_number: 電話番号
+        postal_code: 郵便番号
+        address_id: お届け先

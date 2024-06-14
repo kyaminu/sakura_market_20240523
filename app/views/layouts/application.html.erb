@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>SakuraMarket20240523</title>
+    <%= display_meta_tags site: 'さくらマーケット' %>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -11,6 +11,10 @@
   </head>
 
   <body>
-    <%= yield %>
+    <%= render 'layouts/header' %>
+    <div class="main-container">
+      <%= render 'layouts/shared/toast' %>
+      <%= yield %>
+    </div>
   </body>
 </html>

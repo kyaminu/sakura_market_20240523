@@ -1,0 +1,33 @@
+<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-secondary">
+  <%= link_to 'さくらマーケット', root_path, class: 'navbar-brand ms-2' %>
+  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarCollapse">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <%= link_to '商品一覧', root_path, class: 'nav-link' %>
+      </li>
+      <li class="nav-item">
+        <%= link_to 'カート', cart_path, class: 'nav-link' %>
+      </li>
+      <% if user_signed_in? %>
+        <li class="nav-item">
+          <%= link_to '注文履歴', users_purchases_path, class: 'nav-link' %>
+        </li>
+      <% end %>
+    </ul>
+    <div class="ms-auto me-2">
+      <div class="d-flex">
+        <% if user_signed_in? %>
+          <%= link_to '会員情報', edit_user_registration_path, class: 'btn btn-outline-light me-2' %>
+          <%= button_to 'Log out', destroy_user_session_path, method: :delete, class: 'btn btn-outline-light' %>
+        <% else %>
+          <%= link_to 'Sign up', new_user_registration_path, class: 'btn btn-light me-2' %>
+          <%= link_to 'Log in', user_session_path, class: 'btn btn-outline-light' %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</nav>

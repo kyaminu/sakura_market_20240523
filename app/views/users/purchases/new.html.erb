@@ -1,0 +1,91 @@
+<div class="container">
+  <h1 class="fs-2"><%= title 'カート' %></h1>
+
+  <% if current_cart.cart_items.present? %>
+    <div class="row justify-content-md-around">
+      <div class="d-flex flex-column col-md-6">
+        <% current_cart.cart_items.default_order.preload(:item).each do |cart_item| %>
+          <div class="mb-3">
+            <div class="card">
+              <div class="card-body">
+                <%= link_to item_path(cart_item.item), class: 'cart_item-link' do %>
+                  <%= image_tag(cart_item.item.image.variant(:full)) %>
+                  <div class="mt-3">
+                    <p>
+                      <%= cart_item.item.name %>
+                      <%= number_to_currency(cart_item.item.price_included_tax) %>
+                    </p>
+                  </div>
+                  <div class="card-text text-truncate mb-3">
+                    <%= cart_item.item.description %>
+                  </div>
+                  <div class="text-end">
+                    個数: <%= cart_item.quantity %>
+                  </div>
+                <% end %>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+
+      <div class="col-md-4">
+        <div class="d-flex flex-column">
+          <div class="col-md">
+            <div class="fw-bold fs-3 d-flex mb-3">
+              <div class="text-start">小計</div>
+              <div class="ms-auto"><%= number_to_currency(current_cart.subtotal) %></div>
+            </div>
+            <div class="fw-bold fs-3 d-flex mb-3">
+              <div class="text-start">配送料</div>
+              <div class="ms-auto"><%= number_to_currency(@purchase.delivery_fee_value) %></div>
+            </div>
+            <div class="fw-bold fs-3 d-flex mb-3">
+              <div class="text-start">手数料</div>
+              <div class="ms-auto"><%= number_to_currency(@purchase.handling_fee_value) %></div>
+            </div>
+            <div class="fw-bold fs-3 d-flex mb-3">
+              <div class="text-start">合計(税込)</div>
+              <div class="ms-auto">
+                <%= number_to_currency(@purchase.total_value) %>
+              </div>
+            </div>
+
+            <%= simple_form_for(@purchase, url: users_purchases_path) do |f| %>
+              <%= f.input :delivery_fee, label: false, readonly: true, input_html: { value: @purchase.delivery_fee_value, class: 'd-none' } %>
+              <%= f.input :handling_fee, label: false, readonly: true, input_html: { value: @purchase.handling_fee_value, class: 'd-none' } %>
+
+              <div
+                data-controller="datepicker"
+                data-datepicker-min-value="<%= 3.business_days.after(Date.today).to_date %>"
+                data-datepicker-max-value="<%= 14.business_days.after(Date.today).to_date %>"
+                data-datepicker-allow-weekends-value="false">
+                <%= f.label :delivery_on %>
+                <div class="d-flex justify-content-between">
+                  <div class="col-md-10">
+                    <%= f.input :delivery_on, as: :string, readonly: true, label: false, input_html: { data: { datepicker_target: 'input' } } %>
+                  </div>
+                  <div class="select-date-button">
+                    <div class="btn btn-primary" data-datepicker-target="toggle" data-test-class="select-date-button">選択</div>
+                  </div>
+                </div>
+              </div>
+              <%= f.input :delivery_time, collection: Purchase.delivery_time.options %>
+              <% if current_user.addresses.present? %>
+                <%= f.input :address_id, collection: current_user.addresses, label_method: :address_options %>
+              <% else %>
+                <%= link_to 'お届け先を設定する', new_users_address_path, class: 'btn btn-primary' %>
+              <% end %>
+
+              <div class="d-flex justify-content-around mt-5">
+                <%= f.button :submit, "購入する", class: 'btn btn-lg btn-outline-dark px-3' %>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% else %>
+    現在カートに商品はありません
+  <% end %>
+</div>
